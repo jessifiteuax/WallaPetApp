@@ -8,17 +8,20 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @Composable
-fun BarraNav() {
+fun BarraNav(navController: NavHostController) {
     NavigationBar(
-        containerColor = WallaColTopBar
+        containerColor = WallaColTopBar,
+        tonalElevation = 15.dp
+
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = { },
+            onClick = { navController.navigate("Home") },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
@@ -27,10 +30,11 @@ fun BarraNav() {
                 )
             }
 
+
         )
         NavigationBarItem(
             selected = false,
-            onClick = { },
+            onClick = { navController.navigate("AcercaDe") },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Textsms,

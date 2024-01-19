@@ -11,7 +11,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.components.TextoAcercaDe
 import com.example.wallapetapp.components.textoBarra
@@ -20,9 +20,8 @@ import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun WallaAcercaDe() {
+fun WallaAcercaDe(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -32,7 +31,7 @@ fun WallaAcercaDe() {
                 )
             )
         },
-        bottomBar = { BarraNav() }
+        bottomBar = { BarraNav(navController) }
     ) {
         ContenidoWallaAcercaDe()
     }

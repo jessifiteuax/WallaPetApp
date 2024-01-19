@@ -1,5 +1,28 @@
 package com.example.wallapetapp.navegacion
 
-fun navi(){
-    //crear flujo
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.wallapetapp.pantallas.WallaAcercaDe
+import com.example.wallapetapp.pantallas.WallaEntraMascota
+import com.example.wallapetapp.pantallas.WallaHome
+
+@Composable
+fun navigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "Home") {
+        composable("Home") {
+            WallaHome(navController)
+        }
+        /*composable("Mascotas"){
+            WallaMascotas(navController)
+        }*/
+        composable("EntrarMascotas") {
+            WallaEntraMascota(navController)
+        }
+        composable("AcercaDe") {
+            WallaAcercaDe(navController)
+        }
+    }
 }

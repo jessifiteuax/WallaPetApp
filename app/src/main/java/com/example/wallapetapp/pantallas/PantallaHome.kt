@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.components.BotonEntrarMascotas
 import com.example.wallapetapp.components.BotonVerMascotas
@@ -27,7 +28,7 @@ import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun WallaHome() {
+fun WallaHome(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -37,14 +38,14 @@ fun WallaHome() {
                 )
             )
         },
-        bottomBar = { BarraNav() }
+        bottomBar = { BarraNav(navController) }
     ) {
-        ContenidoWallaHome()
+        ContenidoWallaHome(navController)
     }
 }
 
 @Composable
-fun ContenidoWallaHome() {
+fun ContenidoWallaHome(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -54,7 +55,7 @@ fun ContenidoWallaHome() {
         Spacer(modifier = Modifier.padding(32.dp))
         BotonVerMascotas()
         Spacer(modifier = Modifier.padding(16.dp))
-        BotonEntrarMascotas()
+        BotonEntrarMascotas(navController)
     }
     Box(
         Modifier.fillMaxSize(),

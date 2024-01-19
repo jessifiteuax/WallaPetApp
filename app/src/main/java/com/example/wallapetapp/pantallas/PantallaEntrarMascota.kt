@@ -20,8 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.components.BotonPublicar
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoNum
@@ -29,13 +29,13 @@ import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoEntrarMascota
 import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview
 @Composable
-fun WallaEntraMascota() {
+fun WallaEntraMascota(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -45,7 +45,7 @@ fun WallaEntraMascota() {
                 )
             )
         },
-        //bottomBar = {BarraNav()}
+        bottomBar = {BarraNav(navController)}
     ) {
        Box(
             modifier = Modifier

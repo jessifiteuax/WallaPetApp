@@ -13,9 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.InspectableModifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
 fun BotonVerMascotas() {
@@ -34,13 +34,14 @@ fun BotonVerMascotas() {
         )
         Spacer(modifier = Modifier.width(5.dp))
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
+
     }
 }
 
 @Composable
-fun BotonEntrarMascotas() {
+fun BotonEntrarMascotas(navController: NavHostController) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate("EntrarMascotas") },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White
@@ -58,7 +59,7 @@ fun BotonEntrarMascotas() {
 }
 
 @Composable
-fun BotonPublicar(modifier: Modifier, estaChecked:Boolean) {
+fun BotonPublicar(modifier: Modifier, estaChecked: Boolean) {
     Button(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(

@@ -2,7 +2,6 @@
 
 package com.example.wallapetapp.components
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -54,6 +52,7 @@ fun CampoTextoNum(valor: String = "", onValueChange: (String) -> Unit, label: St
 fun checkDatosOK(): Boolean {
     var estaChecked by remember { mutableStateOf(false) }
 
+
     Box(){
         Row(
             modifier = Modifier.padding(10.dp),
@@ -61,7 +60,9 @@ fun checkDatosOK(): Boolean {
             horizontalArrangement = Arrangement.Center,
 
             ) {
-            Checkbox(checked = estaChecked, onCheckedChange = { estaChecked = !estaChecked })
+            Checkbox(
+                checked = estaChecked,
+                onCheckedChange = { estaChecked = !estaChecked })
             Text(text = "Todos los datos son correctos")
         }
     }

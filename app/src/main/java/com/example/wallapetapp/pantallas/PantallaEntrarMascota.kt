@@ -45,14 +45,14 @@ fun WallaEntraMascota(navController: NavHostController) {
                 )
             )
         },
-        bottomBar = {BarraNav(navController)}
+        bottomBar = { BarraNav(navController) }
     ) {
-       Box(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-       ){
-           ContenidoWallaEntraMascota(Modifier.align(Alignment.Center))
-       }
+        ) {
+            ContenidoWallaEntraMascota(Modifier.align(Alignment.Center))
+        }
 
     }
 }
@@ -66,29 +66,30 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var nombre by remember {mutableStateOf("")}
-        var poblacion by remember {mutableStateOf("")}
-        var codPostal by remember {mutableStateOf("")}
-        var mail by remember {mutableStateOf("")}
-        var observaciones by remember {mutableStateOf("")}
-       var estaChecked: Boolean
+        var nombre by remember { mutableStateOf("") }
+        var poblacion by remember { mutableStateOf("") }
+        var codPostal by remember { mutableStateOf("") }
+        var mail by remember { mutableStateOf("") }
+        var observaciones by remember { mutableStateOf("") }
+        var estaChecked: Boolean
 
         TextoEntrarMascota()
         Spacer(modifier = Modifier.padding(10.dp))
-        CampoTexto(nombre, {nombre=it}, "Escribe su nombre si lo sabes")
+        CampoTexto(nombre, { nombre = it }, "Escribe su nombre si lo sabes")
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(nombre, {poblacion=it}, "Población donde está")
+        CampoTexto(poblacion, { poblacion = it }, "*Población donde está")
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTextoNum(nombre, {codPostal=it}, "Código postal")
+        CampoTextoNum(codPostal, { codPostal = it }, "*Código postal")
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTextoNum(nombre, {mail=it}, "e-mail de contacto")
+        CampoTextoNum(mail, { mail = it }, "*e-mail de contacto")
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(nombre, {observaciones=it}, "Observaciones")
+        CampoTexto(observaciones, { observaciones = it }, "Observaciones")
         Spacer(modifier = Modifier.padding(5.dp))
-        estaChecked= checkDatosOK()
+
+        estaChecked = checkDatosOK(poblacion,codPostal,mail)
+
         Spacer(modifier = Modifier.padding(5.dp))
         BotonPublicar(Modifier.align(Alignment.End), estaChecked)
-
     }
     Box(
         Modifier.fillMaxSize(),
@@ -97,4 +98,3 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         ImagenLogo()
     }
 }
-

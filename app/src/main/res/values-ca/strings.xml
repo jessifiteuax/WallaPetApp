@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WallaPetApp</string>
+    <string name="bienvenida">Benvingut a WALLAPET</string>
+    <string name="subbienvenida">Quina bona acció faràs?</string>
+    <string name="botonvermascotas">Vull veure mascotes perdudes</string>
+    <string name="botonentrarmascotas">Vull entrar una nova mascota</string>
+    <string name="acerca_de_wallapet">Quant a Wallapet</string>
+    <string name="me_he_perdido">M\'he perdut!!!</string>
+    <string name="que_mascota_has_encontrado">Quina mascota has trobat perduda?</string>
+    <string name="texto_acerca_de">Text quant a</string>
+    <string name="escribe_nombre">Escriu el seu nom si el saps</string>
+    <string name="poblacion">*Població en la que es troba</string>
+    <string name="codigo_postal">*Codi postal</string>
+    <string name="email">*e-mail de contacte</string>
+    <string name="observaciones">Observacions</string>
+    <string name="hazle_una_foto">Fes-li una foto!</string>
+    <string name="datos_correctos">Totes les dades són correctes</string>
+    <string name="cuidado">Vigila!</string>
+    <string name="campos_imprescindibles">Els camps amb asterisc són imprescindibles per poder localitzar la mascota</string>
+    <string name="voy_a_ello">Ara hi vaig</string>
+    <string name="publicar">Publicar</string>
+</resources>

@@ -11,7 +11,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.components.TextoAcercaDe
 import com.example.wallapetapp.components.textoBarra
@@ -25,7 +27,7 @@ fun WallaAcercaDe(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { textoBarra(texto = "Acerca de Wallapet") },
+                title = { textoBarra(texto = stringResource(R.string.acerca_de_wallapet)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 )

@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -61,7 +62,7 @@ fun WallaEntraMascota(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { textoBarra(texto = "¡¡¡Me he perdido!!!") },
+                title = { textoBarra(texto = stringResource(R.string.me_he_perdido)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 )
@@ -73,14 +74,14 @@ fun WallaEntraMascota(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            ContenidoWallaEntraMascota(Modifier.align(Alignment.Center))
+            ContenidoWallaEntraMascota()
         }
 
     }
 }
 
 @Composable
-fun ContenidoWallaEntraMascota(modifier: Modifier) {
+fun ContenidoWallaEntraMascota() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -94,23 +95,23 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         var codPostal by remember { mutableStateOf("") }
         var mail by remember { mutableStateOf("") }
         var observaciones by remember { mutableStateOf("") }
-        var estaChecked: Boolean
+        val estaChecked: Boolean
 
         TextoEntrarMascota()
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(nombre, { nombre = it }, "Escribe su nombre si lo sabes")
+        CampoTexto(nombre, { nombre = it }, stringResource(R.string.escribe_nombre))
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(poblacion, { poblacion = it }, "*Población donde está")
+        CampoTexto(poblacion, { poblacion = it }, stringResource(R.string.poblacion))
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTextoNum(codPostal, { codPostal = it }, "*Código postal")
+        CampoTextoNum(codPostal, { codPostal = it }, stringResource(R.string.codigo_postal))
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTextoNum(mail, { mail = it }, "*e-mail de contacto")
+        CampoTexto(mail, { mail = it }, stringResource(R.string.email))
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(observaciones, { observaciones = it }, "Observaciones")
+        CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         Spacer(modifier = Modifier.padding(5.dp))
-        imagenCamara()
+        ImagenCamara()
         estaChecked = checkDatosOK(poblacion,codPostal,mail)
-        BotonPublicar(Modifier.align(Alignment.End), estaChecked)
+        BotonPublicar(estaChecked)
     }
     Box(
         Modifier.fillMaxSize(),
@@ -121,10 +122,9 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
 }
 
 @Composable
-fun imagenCamara() {
+fun ImagenCamara() {
 
     val context = LocalContext.current
-    //val clipboard = LocalClipboardManager.current
     val file = context.createImageFile()
     val uri = FileProvider.getUriForFile(
         Objects.requireNonNull(context),
@@ -163,7 +163,7 @@ fun imagenCamara() {
                     permissionLauncher.launch(android.Manifest.permission.CAMERA)
                 }
             }) {
-            Text(text = "¡Hazle una foto!")
+            Text(text = stringResource(R.string.hazle_una_foto))
         }
         Spacer(modifier = Modifier.width(5.dp))
         Image(

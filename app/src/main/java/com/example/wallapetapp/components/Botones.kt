@@ -13,9 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
 
 @Composable
 fun BotonVerMascotas() {
@@ -29,7 +31,7 @@ fun BotonVerMascotas() {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Quiero ver mascotas perdidas",
+            text = stringResource(R.string.botonvermascotas),
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))
@@ -50,7 +52,7 @@ fun BotonEntrarMascotas(navController: NavHostController) {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Quiero entrar una nueva mascota",
+            text = stringResource(R.string.botonentrarmascotas),
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))
@@ -59,7 +61,7 @@ fun BotonEntrarMascotas(navController: NavHostController) {
 }
 
 @Composable
-fun BotonPublicar(modifier: Modifier, estaChecked: Boolean) {
+fun BotonPublicar(estaChecked: Boolean) {
     Button(
         onClick = { /*TODO*/ },
         colors = ButtonDefaults.buttonColors(
@@ -72,7 +74,7 @@ fun BotonPublicar(modifier: Modifier, estaChecked: Boolean) {
         Icon(imageVector = Icons.Filled.ThumbUpOffAlt, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Publicar",
+            text = stringResource(R.string.publicar),
             fontSize = 16.sp
         )
 

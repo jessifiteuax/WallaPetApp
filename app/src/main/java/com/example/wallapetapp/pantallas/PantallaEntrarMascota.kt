@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.wallapetapp.components.Advertencia
 import com.example.wallapetapp.components.BotonPublicar
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoNum
@@ -87,7 +86,7 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         CampoTexto(observaciones, { observaciones = it }, "Observaciones")
         Spacer(modifier = Modifier.padding(5.dp))
 
-        estaChecked = checkDatosOK()
+        estaChecked = checkDatosOK(poblacion,codPostal,mail)
 
         Spacer(modifier = Modifier.padding(5.dp))
         BotonPublicar(Modifier.align(Alignment.End), estaChecked)
@@ -99,11 +98,3 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         ImagenLogo()
     }
 }
-
-/* if (verAlerta) {
-            Advertencia(
-                titulo = "¡Cuidado!",
-                mensaje = "Los campos con asterisco son impescindibles para poder localizar la mascota",
-                textoConfirm ="Voy a ello",
-                onConfirmClick = { verAlerta=false }) { }
-        }*/

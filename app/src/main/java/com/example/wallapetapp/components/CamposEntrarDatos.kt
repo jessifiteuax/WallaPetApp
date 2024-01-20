@@ -49,21 +49,34 @@ fun CampoTextoNum(valor: String = "", onValueChange: (String) -> Unit, label: St
 }
 
 @Composable
-fun checkDatosOK(): Boolean {
+fun checkDatosOK(poblacion: String, codPostal: String, mail: String): Boolean {
     var estaChecked by remember { mutableStateOf(false) }
-
+    var verAlerta by remember { mutableStateOf(false) }
 
     Box(){
         Row(
             modifier = Modifier.padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-
             ) {
             Checkbox(
                 checked = estaChecked,
-                onCheckedChange = { estaChecked = !estaChecked })
+                onCheckedChange = {
+                    if(poblacion!= "" && codPostal != "" && mail!=""){
+                        estaChecked = !estaChecked
+                    }else{
+                        verAlerta=true
+                    }
+                }
+            )
             Text(text = "Todos los datos son correctos")
+            if (verAlerta) {
+            Advertencia(
+                titulo = "¡Cuidado!",
+                mensaje = "Los campos con asterisco son impescindibles para poder localizar la mascota",
+                textoConfirm ="Voy a ello",
+                onConfirmClick = { verAlerta=false }) { }
+             }
         }
     }
     return estaChecked

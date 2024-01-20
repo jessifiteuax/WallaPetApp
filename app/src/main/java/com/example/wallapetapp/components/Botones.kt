@@ -50,7 +50,7 @@ fun BotonEntrarMascotas(navController: NavHostController) {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Quiero entrar una nuevga mascota",
+            text = "Quiero entrar una nueva mascota",
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))
@@ -66,7 +66,7 @@ fun BotonPublicar(modifier: Modifier, estaChecked: Boolean) {
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White
         ),
-        modifier = Modifier.padding(30.dp),
+        modifier = Modifier.padding(10.dp),
         enabled = estaChecked
     ) {
         Icon(imageVector = Icons.Filled.ThumbUpOffAlt, tint = Color.White, contentDescription = "")

@@ -7,13 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.example.wallapetapp.fotos.imagenCamara
 import com.example.wallapetapp.navegacion.navigation
-import com.example.wallapetapp.pantallas.WallaAcercaDe
 import com.example.wallapetapp.pantallas.WallaEntraMascota
-import com.example.wallapetapp.pantallas.WallaHome
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,6 +23,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navigation()
+                    //imagenCamara()
                 }
             }
         }

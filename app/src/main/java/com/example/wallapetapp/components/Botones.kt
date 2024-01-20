@@ -50,7 +50,7 @@ fun BotonEntrarMascotas(navController: NavHostController) {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Quiero entrar una nuevga mascota",
+            text = "Quiero entrar una nueva mascota",
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))

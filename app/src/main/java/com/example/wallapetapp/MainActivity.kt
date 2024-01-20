@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.wallapetapp.fotos.imagenCamara
 import com.example.wallapetapp.navegacion.navigation
+import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +22,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //navigation()
-                    imagenCamara()
+                    navigation()
+                    //imagenCamara()
                 }
             }
         }

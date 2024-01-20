@@ -43,7 +43,7 @@ import java.util.Objects
 fun imagenCamara() {
 
     val context = LocalContext.current
-    val clipboard = LocalClipboardManager.current
+    //val clipboard = LocalClipboardManager.current
     val file = context.createImageFile()
     val uri = FileProvider.getUriForFile(
         Objects.requireNonNull(context),

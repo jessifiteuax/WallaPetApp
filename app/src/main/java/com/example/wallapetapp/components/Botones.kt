@@ -66,7 +66,7 @@ fun BotonPublicar(modifier: Modifier, estaChecked: Boolean) {
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White
         ),
-        modifier = Modifier.padding(30.dp),
+        modifier = Modifier.padding(10.dp),
         enabled = estaChecked
     ) {
         Icon(imageVector = Icons.Filled.ThumbUpOffAlt, tint = Color.White, contentDescription = "")

@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -82,7 +84,8 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -94,7 +97,7 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         var estaChecked: Boolean
 
         TextoEntrarMascota()
-        //Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(nombre, { nombre = it }, "Escribe su nombre si lo sabes")
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(poblacion, { poblacion = it }, "*Población donde está")
@@ -104,7 +107,7 @@ fun ContenidoWallaEntraMascota(modifier: Modifier) {
         CampoTextoNum(mail, { mail = it }, "*e-mail de contacto")
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(observaciones, { observaciones = it }, "Observaciones")
-        //Spacer(modifier = Modifier.padding(5.dp))
+        Spacer(modifier = Modifier.padding(5.dp))
         imagenCamara()
         estaChecked = checkDatosOK(poblacion,codPostal,mail)
         BotonPublicar(Modifier.align(Alignment.End), estaChecked)
@@ -144,7 +147,9 @@ fun imagenCamara() {
         }
     Row {
         Button(
-            modifier = Modifier.weight(1f).padding(22.dp),
+            modifier = Modifier
+                .weight(1f)
+                .padding(22.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),
                 contentColor = Color.White
@@ -162,7 +167,9 @@ fun imagenCamara() {
         }
         Spacer(modifier = Modifier.width(5.dp))
         Image(
-            modifier= Modifier.size(80.dp).weight(0.7f),
+            modifier= Modifier
+                .size(80.dp)
+                .weight(0.7f),
             painter = rememberAsyncImagePainter(if (image.path?.isNotEmpty() == true) image else imageDefault),
             contentDescription = null
         )

@@ -2,13 +2,13 @@
 
 ## Índice
 
-* [Descripción de la aplicación](#descripción-de-la-aplicación)
+* [Qué es y por qué usar Wallapet](#qué-es-y-por-qué-usar-Wallapet)
 
 * [Requisitos mínimos](#requisitos-mínimos)
 
 * [Instalación](##instalación)
 
-* [Cómo usar Wallapet](#como-usar-wallapet)
+* [Cómo usar Wallapet](#cómo-usar-wallapet)
 
 ## Qué es y por qué usar Wallapet
 

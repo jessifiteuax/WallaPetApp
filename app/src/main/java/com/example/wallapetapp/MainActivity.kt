@@ -11,7 +11,9 @@ import com.example.wallapetapp.fotos.imagenCamara
 import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

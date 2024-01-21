@@ -10,16 +10,14 @@ data class Mascotas(
     val id: Long = 0,
     @ColumnInfo(name = "Nombre")
     val nombre: String = "Desconocido",
-    @ColumnInfo(name = "Población")
+    @ColumnInfo(name = "Poblacion")
     val poblacion: String,
-    @ColumnInfo(name = "Código Postal")
-    val codigoPostal: String,
+    @ColumnInfo(name = "CodigoPostal")
+    val codigopostal: String,
     @ColumnInfo(name = "email")
     val mail: String,
     @ColumnInfo(name="Observaciones")
     val observaciones: String = "Desconocido"
    // @DrawableRes var foto: Int
 
-) {
-
-}
+)

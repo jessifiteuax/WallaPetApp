@@ -16,7 +16,7 @@ import com.example.wallapetapp.ui.theme.WallaColTopBar
 fun BarraNav(navController: NavHostController) {
     NavigationBar(
         containerColor = WallaColTopBar,
-        tonalElevation = 15.dp
+        tonalElevation = 10.dp
 
     ) {
         NavigationBarItem(

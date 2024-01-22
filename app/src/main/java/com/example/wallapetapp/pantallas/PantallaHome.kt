@@ -53,7 +53,7 @@ fun ContenidoWallaHome(navController: NavHostController) {
     ) {
         TextoHome()
         Spacer(modifier = Modifier.padding(32.dp))
-        BotonVerMascotas()
+        BotonVerMascotas(navController)
         Spacer(modifier = Modifier.padding(16.dp))
         BotonEntrarMascotas(navController)
     }

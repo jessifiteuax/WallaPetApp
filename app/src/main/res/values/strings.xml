@@ -19,4 +19,5 @@
     <string name="campos_imprescindibles">Los campos con asterisco son imprescindibles para poder localizar la mascota</string>
     <string name="voy_a_ello">Voy a ello</string>
     <string name="publicar">Publicar</string>
+    <string name="mascotas">Mascotas</string>
 </resources>

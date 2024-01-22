@@ -16,13 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
 
 @Composable
-fun BotonVerMascotas() {
+fun BotonVerMascotas(navController: NavHostController) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { navController.navigate("Mascotas") },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White,

@@ -65,7 +65,7 @@ fun ContenidoWallaMascotas() {
     //LazyColumn(verticalArrangement = Arrangement.SpaceEvenly){
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
         ItemMascota()
-        // items(){            //poner en los parentesis lo q llega de la consulta
+        // items(){           //poner en los parentesis lo q llega de la consulta
 
         //}
     }

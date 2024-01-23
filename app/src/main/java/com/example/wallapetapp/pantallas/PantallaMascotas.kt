@@ -14,9 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -51,19 +55,28 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
                 title = { textoBarra(texto = stringResource(R.string.mascotas)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar,
-                )
+                ),
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() })
+                    {
+                        Icon(imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = null,
+                            tint = Color.White)
+                    }
+                }
             )
         },
         bottomBar = { BarraNav(navController = navController) }
     ) {
-        ContenidoWallaMascotas()
+        ContenidoWallaMascotas(modifier = Modifier.padding())
     }
 }
 
 @Composable
-fun ContenidoWallaMascotas() {
+fun ContenidoWallaMascotas(modifier: Modifier) {
     //LazyColumn(verticalArrangement = Arrangement.SpaceEvenly){
-    Column(verticalArrangement = Arrangement.SpaceEvenly) {
+    Column(verticalArrangement = Arrangement.SpaceEvenly,
+        modifier = modifier) {
         ItemMascota()
         // items(){           //poner en los parentesis lo q llega de la consulta
 
@@ -147,51 +160,3 @@ fun ItemMascota() {         //tiene q venir de la BBDD el VM
         }
     }
 }
-/*fun ItemMascota() {    //poner en los parentesis la lista que llega de la consulta
-    Card(border = BorderStroke(2.dp, Color.Red), modifier = Modifier.width(200.dp)) {
-        Image(
-            painter = painterResource(id = R.drawable.fotodefecto),
-            contentDescription = "foto mascota",
-            modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            text = "nombre de la mascota", //tiene q venir de la BBDD
-            fontSize = 18.sp,
-            fontFamily = CaveatFamily,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-        Text(
-            text = "codigo postal",            //tiene q venir de la BBDD
-            fontSize = 12.sp,
-            fontFamily = CaveatFamily,
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(8.dp)
-        )
-        Text(
-            text = "npoblacion",         //tiene q venir de la BBDD
-            fontSize = 12.sp,
-            fontFamily = CaveatFamily,
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(8.dp)
-        )
-        Text(
-            text = "mail contacto",         //tiene q venir de la BBDD
-            fontSize = 12.sp,
-            fontFamily = CaveatFamily,
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(8.dp)
-        )
-        Text(
-            text = "observaciones",         //tiene q venir de la BBDD
-            fontSize = 12.sp,
-            fontFamily = CaveatFamily,
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(8.dp)
-        )
-    }
-}*/

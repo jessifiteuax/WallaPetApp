@@ -120,6 +120,7 @@ fun ContenidoWallaEntraMascota() {
         ImagenCamara()
         estaChecked = checkDatosOK(poblacion,codPostal,mail)
         BotonPublicar(estaChecked)
+
     }
     Box(
         Modifier.fillMaxSize(),

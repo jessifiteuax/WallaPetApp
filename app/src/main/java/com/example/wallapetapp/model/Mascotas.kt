@@ -17,7 +17,9 @@ data class Mascotas(
     @ColumnInfo(name = "email")
     val mail: String,
     @ColumnInfo(name="Observaciones")
-    val observaciones: String = "Desconocido"
+    val observaciones: String = "Desconocido",
+    @ColumnInfo(name="idUsuario")
+    val idusuario: Int
    // @DrawableRes var foto: Int
 
 )

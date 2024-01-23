@@ -3,7 +3,9 @@ package com.example.wallapetapp.pantallas
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -33,20 +35,22 @@ fun WallaAcercaDe(navController: NavHostController) {
                     containerColor = WallaColTopBar
                 ),
                 navigationIcon = {
-                  iconoBarra(navController)
+                    iconoBarra(navController)
                 }
             )
         },
+        content = {
+            padding ->
+            ContenidoWallaAcercaDe(padding)
+        },
         bottomBar = { BarraNav(navController) }
-    ) {
-        ContenidoWallaAcercaDe()
-    }
+    )
 }
 
 @Composable
-fun ContenidoWallaAcercaDe() {
+fun ContenidoWallaAcercaDe(padding: PaddingValues) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(padding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,17 +50,19 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
                 }
             )
         },
+        content = {
+            padding ->
+            ContenidoWallaMascotas(padding, mascotasVM)
+        },
         bottomBar = { BarraNav(navController = navController) }
-    ) {
-        ContenidoWallaMascotas(modifier = Modifier.padding(), mascotasVM)
-    }
+    )
 }
 
 @Composable
-fun ContenidoWallaMascotas(modifier: Modifier, mascotasVM: MascotasViewModel) {
+fun ContenidoWallaMascotas(padding: PaddingValues, mascotasVM: MascotasViewModel) {
     //LazyColumn(verticalArrangement = Arrangement.SpaceEvenly){
-    Column(verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = modifier) {
+    Column(verticalArrangement = Arrangement.Top,
+        modifier = Modifier.padding(padding)) {
         ItemMascota()
         // items(){           //poner en los parentesis lo q llega de la consulta
 

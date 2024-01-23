@@ -14,6 +14,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,7 +47,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.wallapetapp.R
@@ -82,25 +82,30 @@ fun WallaEntraMascota(navController: NavHostController, mascotasVM: MascotasView
                 }
             )
         },
+        content = {
+            padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                ContenidoWallaEntraMascota(padding,navController,mascotasVM)
+            }
+        },
         bottomBar = { BarraNav(navController) }
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            ContenidoWallaEntraMascota(navController,mascotasVM)
-        }
-
-    }
+    )
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ContenidoWallaEntraMascota(navController: NavHostController,mascotasVM: MascotasViewModel) {
+fun ContenidoWallaEntraMascota(
+    padding: PaddingValues,
+    navController: NavHostController,
+    mascotasVM: MascotasViewModel
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(padding)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

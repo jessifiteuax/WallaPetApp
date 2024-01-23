@@ -82,13 +82,12 @@ fun WallaEntraMascota(navController: NavHostController, mascotasVM: MascotasView
                 }
             )
         },
-        content = {
-            padding ->
+        content = { padding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                ContenidoWallaEntraMascota(padding,navController,mascotasVM)
+                ContenidoWallaEntraMascota(padding, navController, mascotasVM)
             }
         },
         bottomBar = { BarraNav(navController) }
@@ -115,6 +114,7 @@ fun ContenidoWallaEntraMascota(
         var codPostal by remember { mutableStateOf("") }
         var mail by remember { mutableStateOf("") }
         var observaciones by remember { mutableStateOf("") }
+        //var fecha by remember { mutableStateOf("")  }
         val estaChecked: Boolean
 
         TextoEntrarMascota()
@@ -130,21 +130,31 @@ fun ContenidoWallaEntraMascota(
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         Spacer(modifier = Modifier.padding(5.dp))
         ImagenCamara()
-        estaChecked = checkDatosOK(poblacion,codPostal,mail)
+        estaChecked = checkDatosOK(poblacion, codPostal, mail)
         //BotonPublicar(estaChecked)
         Button(
             onClick = {
-                      mascotasVM.addMascota(
-                            Mascotas(
-                                nombre = nombre,
-                                poblacion = poblacion,
-                                codigopostal = codPostal,
-                                mail = mail,
-                                observaciones =  observaciones,
-                                fecha = LocalDate.now().toString()
-                            )
-                      )
-                      navController.popBackStack()
+                val mascota = Mascotas(
+                    0,
+                    nombre,
+                    poblacion,
+                    codPostal,
+                    mail,
+                    observaciones,
+                    LocalDate.now().toString()
+                )
+                mascotasVM.addMascota(mascota)
+                /*mascotasVM.addMascota(
+                    Mascotas(
+                        nombre = nombre,
+                        poblacion = poblacion,
+                        codigopostal = codPostal,
+                        mail = mail,
+                        observaciones = observaciones,
+                        fecha = LocalDate.now().toString()
+                    )
+                )*/
+                //navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),
@@ -153,7 +163,11 @@ fun ContenidoWallaEntraMascota(
             modifier = Modifier.padding(10.dp),
             enabled = estaChecked
         ) {
-            Icon(imageVector = Icons.Filled.ThumbUpOffAlt, tint = Color.White, contentDescription = "")
+            Icon(
+                imageVector = Icons.Filled.ThumbUpOffAlt,
+                tint = Color.White,
+                contentDescription = ""
+            )
             Spacer(modifier = Modifier.width(5.dp))
             Text(
                 text = stringResource(R.string.publicar),
@@ -216,7 +230,7 @@ fun ImagenCamara() {
         }
         Spacer(modifier = Modifier.width(5.dp))
         Image(
-            modifier= Modifier
+            modifier = Modifier
                 .size(80.dp)
                 .weight(0.7f),
             painter = rememberAsyncImagePainter(if (image.path?.isNotEmpty() == true) image else imageDefault),

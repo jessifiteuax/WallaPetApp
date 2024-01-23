@@ -10,12 +10,16 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -60,20 +64,17 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
 
 @Composable
 fun ContenidoWallaMascotas(padding: PaddingValues, mascotasVM: MascotasViewModel) {
-    //LazyColumn(verticalArrangement = Arrangement.SpaceEvenly){
-    Column(verticalArrangement = Arrangement.Top,
-        modifier = Modifier.padding(padding)) {
-        ItemMascota()
-        // items(){           //poner en los parentesis lo q llega de la consulta
-
-        //}
+    val mascotasList by mascotasVM.mascotasList.collectAsState()
+    LazyColumn{
+         items(mascotasList){item->
+             Text(text = item.nombre)
+        }
     }
 }
 
 @Composable
 fun ItemMascota() {         //tiene q venir de la BBDD el VM
     Column {
-        Spacer(modifier = Modifier.height(60.dp))
         Box(
             modifier = Modifier
                 .height(200.dp)

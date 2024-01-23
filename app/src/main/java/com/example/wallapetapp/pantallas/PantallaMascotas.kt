@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.model.Mascotas
 import com.example.wallapetapp.navegacion.BarraNav
@@ -57,12 +58,7 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
                     containerColor = WallaColTopBar,
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() })
-                    {
-                        Icon(imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White)
-                    }
+                    iconoBarra(navController)
                 }
             )
         },

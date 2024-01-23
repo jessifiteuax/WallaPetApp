@@ -53,6 +53,7 @@ import com.example.wallapetapp.components.CampoTextoNum
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoEntrarMascota
 import com.example.wallapetapp.components.checkDatosOK
+import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
@@ -71,12 +72,7 @@ fun WallaEntraMascota(navController: NavHostController) {
                     containerColor = WallaColTopBar
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack()})
-                    {
-                        Icon(imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White)
-                    }
+                    iconoBarra(navController)
                 }
             )
         },

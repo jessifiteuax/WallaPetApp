@@ -3,6 +3,7 @@ package com.example.wallapetapp.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "mascotas")
 data class Mascotas(
@@ -18,8 +19,11 @@ data class Mascotas(
     val mail: String,
     @ColumnInfo(name="Observaciones")
     val observaciones: String = "Desconocido",
-    @ColumnInfo(name="idUsuario")
-    val idusuario: Int
+    @ColumnInfo(name="fechaEntrada")
+    val fecha: String,
+
+   // @ColumnInfo(name="idUsuario")
+   // val idusuario: Int
    // @DrawableRes var foto: Int
 
 )

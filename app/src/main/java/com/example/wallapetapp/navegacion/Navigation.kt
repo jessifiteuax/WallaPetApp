@@ -21,7 +21,7 @@ fun navigation(mascotasVM: MascotasViewModel) {
             WallaMascotas(navController, mascotasVM)
         }
         composable("EntrarMascotas") {
-            WallaEntraMascota(navController)
+            WallaEntraMascota(navController, mascotasVM)
         }
         composable("AcercaDe") {
             WallaAcercaDe(navController)

@@ -2,24 +2,18 @@ package com.example.wallapetapp.pantallas
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -33,14 +27,11 @@ import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.CaveatFamily
 import com.example.wallapetapp.ui.theme.WallaColTopBar
-import com.example.wallapetapp.viewModel.MascotasViewModel
 
-
-//hacer una vista  scaffold recibiendo MascotasVM i pasarla a la funcion del view
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewModel) {
+fun WallaMascotas(navController: NavHostController) {
 
     Scaffold(
         topBar = {
@@ -56,16 +47,14 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
         },
         content = {
             padding ->
-            ContenidoWallaMascotas(padding, mascotasVM)
+            ContenidoWallaMascotas(padding)
         },
         bottomBar = { BarraNav(navController = navController) }
     )
 }
 
 @Composable
-fun ContenidoWallaMascotas(padding: PaddingValues, mascotasVM: MascotasViewModel) {
-    val mascotasList by mascotasVM.mascotasList.collectAsState()
-
+fun ContenidoWallaMascotas(padding: PaddingValues) {
     Box(
         modifier = Modifier
             .height(200.dp)
@@ -77,23 +66,6 @@ fun ContenidoWallaMascotas(padding: PaddingValues, mascotasVM: MascotasViewModel
             painter = painterResource(id = R.drawable.logowallapet),
             contentDescription = "foto mascota"         //tiene q venir de la BBDD
         )
-    }
-
-    LazyColumn{
-         items(mascotasList){item->
-             //Text(text = item.nombre)
-             Box(
-                 modifier = Modifier
-                     .height(30.dp)
-                     .fillMaxWidth(),
-                 contentAlignment = Alignment.Center
-             ) {
-                 Text(text = "nombre de la mascota",         //tiene q venir de la BBDD
-                     fontSize = 20.sp,
-                     fontFamily = CaveatFamily
-                 )
-             }
-        }
     }
 }
 

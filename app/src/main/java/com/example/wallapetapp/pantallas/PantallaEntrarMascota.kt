@@ -58,10 +58,8 @@ import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.fotos.createImageFile
-import com.example.wallapetapp.model.Mascotas
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
-import com.example.wallapetapp.viewModel.MascotasViewModel
 import java.time.LocalDate
 import java.util.Objects
 
@@ -69,7 +67,7 @@ import java.util.Objects
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun WallaEntraMascota(navController: NavHostController, mascotasVM: MascotasViewModel) {
+fun WallaEntraMascota(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -87,7 +85,7 @@ fun WallaEntraMascota(navController: NavHostController, mascotasVM: MascotasView
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                ContenidoWallaEntraMascota(padding, navController, mascotasVM)
+                ContenidoWallaEntraMascota(padding, navController)
             }
         },
         bottomBar = { BarraNav(navController) }
@@ -98,8 +96,7 @@ fun WallaEntraMascota(navController: NavHostController, mascotasVM: MascotasView
 @Composable
 fun ContenidoWallaEntraMascota(
     padding: PaddingValues,
-    navController: NavHostController,
-    mascotasVM: MascotasViewModel
+    navController: NavHostController
 ) {
     Column(
         modifier = Modifier
@@ -134,27 +131,8 @@ fun ContenidoWallaEntraMascota(
         //BotonPublicar(estaChecked)
         Button(
             onClick = {
-                /*val mascota = Mascotas(
-                    0,
-                    nombre,
-                    poblacion,
-                    codPostal,
-                    mail,
-                    observaciones,
-                    LocalDate.now().toString()
-                )
-                mascotasVM.addMascota(mascota)*/
-                mascotasVM.addMascota(
-                    Mascotas(
-                        nombre = nombre,
-                        poblacion = poblacion,
-                        codigopostal = codPostal,
-                        mail = mail,
-                        observaciones = observaciones,
-                        fecha = LocalDate.now().toString()
-                    )
-                )
-                navController.popBackStack()
+
+               // navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),

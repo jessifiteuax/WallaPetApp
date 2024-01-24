@@ -64,7 +64,7 @@ fun ContenidoWallaMascotas(padding: PaddingValues) {
     ) {
         Image(
             painter = painterResource(id = R.drawable.logowallapet),
-            contentDescription = "foto mascota"         //tiene q venir de la BBDD
+            contentDescription = "foto mascota"         //tiene q venir de la BBDD poner una por defecto
         )
     }
 }

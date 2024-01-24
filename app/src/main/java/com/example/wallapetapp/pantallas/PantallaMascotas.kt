@@ -65,9 +65,34 @@ fun WallaMascotas(navController: NavHostController, mascotasVM: MascotasViewMode
 @Composable
 fun ContenidoWallaMascotas(padding: PaddingValues, mascotasVM: MascotasViewModel) {
     val mascotasList by mascotasVM.mascotasList.collectAsState()
+
+    Box(
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth()
+            .padding(padding),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.logowallapet),
+            contentDescription = "foto mascota"         //tiene q venir de la BBDD
+        )
+    }
+
     LazyColumn{
          items(mascotasList){item->
-             Text(text = item.nombre)
+             //Text(text = item.nombre)
+             Box(
+                 modifier = Modifier
+                     .height(30.dp)
+                     .fillMaxWidth(),
+                 contentAlignment = Alignment.Center
+             ) {
+                 Text(text = "nombre de la mascota",         //tiene q venir de la BBDD
+                     fontSize = 20.sp,
+                     fontFamily = CaveatFamily
+                 )
+             }
         }
     }
 }

@@ -134,7 +134,7 @@ fun ContenidoWallaEntraMascota(
         //BotonPublicar(estaChecked)
         Button(
             onClick = {
-                val mascota = Mascotas(
+                /*val mascota = Mascotas(
                     0,
                     nombre,
                     poblacion,
@@ -143,8 +143,8 @@ fun ContenidoWallaEntraMascota(
                     observaciones,
                     LocalDate.now().toString()
                 )
-                mascotasVM.addMascota(mascota)
-                /*mascotasVM.addMascota(
+                mascotasVM.addMascota(mascota)*/
+                mascotasVM.addMascota(
                     Mascotas(
                         nombre = nombre,
                         poblacion = poblacion,
@@ -153,8 +153,8 @@ fun ContenidoWallaEntraMascota(
                         observaciones = observaciones,
                         fecha = LocalDate.now().toString()
                     )
-                )*/
-                //navController.popBackStack()
+                )
+                navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),

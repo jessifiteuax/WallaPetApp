@@ -161,7 +161,6 @@ fun ContenidoWallaEntraMascota(
         ImagenLogo()
     }
 }
-
 @Composable
 fun ImagenCamara() {
 

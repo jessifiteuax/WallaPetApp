@@ -5,13 +5,16 @@ package com.example.wallapetapp.pantallas
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,10 +23,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ThumbUpOffAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -38,23 +44,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.wallapetapp.R
-import com.example.wallapetapp.components.BotonPublicar
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoNum
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoEntrarMascota
 import com.example.wallapetapp.components.checkDatosOK
+import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
+import java.time.LocalDate
 import java.util.Objects
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -65,27 +74,34 @@ fun WallaEntraMascota(navController: NavHostController) {
                 title = { textoBarra(texto = stringResource(R.string.me_he_perdido)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
-                )
+                ),
+                navigationIcon = {
+                    iconoBarra(navController)
+                }
             )
         },
+        content = { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                ContenidoWallaEntraMascota(padding, navController)
+            }
+        },
         bottomBar = { BarraNav(navController) }
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            ContenidoWallaEntraMascota()
-        }
-
-    }
+    )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ContenidoWallaEntraMascota() {
+fun ContenidoWallaEntraMascota(
+    padding: PaddingValues,
+    navController: NavHostController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp)
+            .padding(padding)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -95,6 +111,7 @@ fun ContenidoWallaEntraMascota() {
         var codPostal by remember { mutableStateOf("") }
         var mail by remember { mutableStateOf("") }
         var observaciones by remember { mutableStateOf("") }
+        //var fecha by remember { mutableStateOf("")  }
         val estaChecked: Boolean
 
         TextoEntrarMascota()
@@ -110,8 +127,32 @@ fun ContenidoWallaEntraMascota() {
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         Spacer(modifier = Modifier.padding(5.dp))
         ImagenCamara()
-        estaChecked = checkDatosOK(poblacion,codPostal,mail)
-        BotonPublicar(estaChecked)
+        estaChecked = checkDatosOK(poblacion, codPostal, mail)
+        //BotonPublicar(estaChecked)
+        Button(
+            onClick = {
+
+               // navController.popBackStack()
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFC03D69),
+                contentColor = Color.White
+            ),
+            modifier = Modifier.padding(10.dp),
+            enabled = estaChecked
+        ) {
+            Icon(
+                imageVector = Icons.Filled.ThumbUpOffAlt,
+                tint = Color.White,
+                contentDescription = ""
+            )
+            Spacer(modifier = Modifier.width(5.dp))
+            Text(
+                text = stringResource(R.string.publicar),
+                fontSize = 16.sp
+            )
+
+        }
     }
     Box(
         Modifier.fillMaxSize(),
@@ -167,7 +208,7 @@ fun ImagenCamara() {
         }
         Spacer(modifier = Modifier.width(5.dp))
         Image(
-            modifier= Modifier
+            modifier = Modifier
                 .size(80.dp)
                 .weight(0.7f),
             painter = rememberAsyncImagePainter(if (image.path?.isNotEmpty() == true) image else imageDefault),

@@ -61,7 +61,7 @@ fun BotonEntrarMascotas(navController: NavHostController) {
     }
 }
 
-@Composable
+/*@Composable
 fun BotonPublicar(estaChecked: Boolean) {
     Button(
         onClick = { /*TODO*/ },
@@ -80,7 +80,7 @@ fun BotonPublicar(estaChecked: Boolean) {
         )
 
     }
-}
+}*/
 
 
 

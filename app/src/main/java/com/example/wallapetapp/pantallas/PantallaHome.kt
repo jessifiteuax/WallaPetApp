@@ -38,10 +38,11 @@ fun WallaHome(navController: NavHostController) {
                 )
             )
         },
+        content = {
+            ContenidoWallaHome(navController)
+        },
         bottomBar = { BarraNav(navController) }
-    ) {
-        ContenidoWallaHome(navController)
-    }
+    )
 }
 
 @Composable

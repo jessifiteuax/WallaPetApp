@@ -25,5 +25,5 @@
     <string name="codigo_postalcard">Código postal</string>
     <string name="emailcard">e-mail de contacto</string>
     <string name="fecha_de_entrada">Fecha de registro</string>
-    <string name="home">Home</string>
+    <string name="home" translatable="false">Home</string>
 </resources>

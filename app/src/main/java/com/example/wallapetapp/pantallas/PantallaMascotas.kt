@@ -5,34 +5,44 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.MascotaCard
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.domain.model.Mascota
+import com.example.wallapetapp.domain.repository.Mascotas
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.CaveatFamily
 import com.example.wallapetapp.ui.theme.WallaColTopBar
+import com.example.wallapetapp.vm.MascotasViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallaMascotas(navController: NavHostController) {
-
+fun WallaMascotas(navController: NavHostController, viewModel: MascotasViewModel= hiltViewModel()) {
+    val mascotas by viewModel.mascotas.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -47,100 +57,23 @@ fun WallaMascotas(navController: NavHostController) {
         },
         content = {
             padding ->
-            ContenidoWallaMascotas(padding)
+            ContenidoWallaMascotas(padding, mascotas)
         },
         bottomBar = { BarraNav(navController = navController) }
     )
 }
 
 @Composable
-fun ContenidoWallaMascotas(padding: PaddingValues) {
-    Box(
-        modifier = Modifier
-            .height(200.dp)
-            .fillMaxWidth()
-            .padding(padding),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logowallapet),
-            contentDescription = "foto mascota"         //tiene q venir de la BBDD poner una por defecto
-        )
+fun ContenidoWallaMascotas(padding: PaddingValues, mascotas: Mascotas) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(padding)
+    ){
+        items(mascotas){
+            mascota ->
+            MascotaCard(
+                mascota = mascota
+            )
+        }
     }
 }
 
-@Composable
-fun ItemMascota() {         //tiene q venir de la BBDD el VM
-    Column {
-        Box(
-            modifier = Modifier
-                .height(200.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logowallapet),
-                contentDescription = "foto mascota"         //tiene q venir de la BBDD
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(30.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(text = "nombre de la mascota",         //tiene q venir de la BBDD
-                fontSize = 20.sp,
-                fontFamily = CaveatFamily
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(30.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Text(text = "codigo postal",         //tiene q venir de la BBDD
-                fontSize = 20.sp,
-                fontFamily = CaveatFamily,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(30.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Text(text = "poblacion",         //tiene q venir de la BBDD
-                fontSize = 20.sp,
-                fontFamily = CaveatFamily,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(30.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Text(text = "email",         //tiene q venir de la BBDD
-                fontSize = 20.sp,
-                fontFamily = CaveatFamily,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(30.dp)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Text(text = "observaciones",         //tiene q venir de la BBDD
-                fontSize = 20.sp,
-                fontFamily = CaveatFamily,
-               modifier = Modifier.padding(horizontal = 10.dp)
-            )
-        }
-    }
-}

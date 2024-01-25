@@ -12,7 +12,7 @@
     <string name="escribe_nombre">Write the name if you know it</string>
     <string name="poblacion">*Town/City where it is</string>
     <string name="codigo_postal">*Postcode</string>
-    <string name="email">**Contact email address</string>
+    <string name="email">*Contact email address</string>
     <string name="observaciones">Comments</string>
     <string name="hazle_una_foto">Take a photo!</string>
     <string name="datos_correctos">All the information is correct</string>
@@ -21,4 +21,9 @@
     <string name="voy_a_ello">I\'ll do it</string>
     <string name="publicar">Submit</string>
     <string name="mascotas">Pets</string>
+    <string name="nombre">Name</string>
+    <string name="fecha_de_entrada">Registration date</string>
+    <string name="poblacioncard">Town/City where it is</string>
+    <string name="codigo_postalcard">Postcode</string>
+    <string name="emailcard">Contact email address</string>
 </resources>

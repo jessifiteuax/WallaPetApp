@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.wallapetapp.R
 import com.example.wallapetapp.domain.model.Mascota
 
 @Composable
@@ -31,13 +33,18 @@ fun MascotaCard(mascota: Mascota) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text(mascota.nombre)
-                Text(mascota.poblacion)
-                Text(mascota.codPostal)
-                Text(mascota.mail)
-                Text(mascota.observaciones)
-                Text(mascota.fecha)
-
+                TextoCardTitulos(texto = stringResource(R.string.nombre))
+                TextoCardDatos(texto = mascota.nombre)
+                TextoCardTitulos(texto = stringResource(R.string.poblacioncard))
+                TextoCardDatos(texto = mascota.poblacion)
+                TextoCardTitulos(texto = stringResource(R.string.codigo_postalcard))
+                TextoCardDatos(texto = mascota.codPostal)
+                TextoCardTitulos(texto = stringResource(R.string.emailcard))
+                TextoCardDatos(texto = mascota.mail)
+                TextoCardTitulos(texto = stringResource(R.string.observaciones))
+                TextoCardDatos(texto = mascota.observaciones)
+                TextoCardTitulos(texto = stringResource(R.string.fecha_de_entrada))
+                TextoCardDatos(texto = mascota.fecha)
             }
         }
     }

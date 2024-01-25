@@ -21,4 +21,9 @@
     <string name="voy_a_ello">Ara hi vaig</string>
     <string name="publicar">Publicar</string>
     <string name="mascotas">Mascotes</string>
+    <string name="nombre">Nom</string>
+    <string name="fecha_de_entrada">Data de registre</string>
+    <string name="poblacioncard">Població en la que es troba</string>
+    <string name="codigo_postalcard">Codi postal</string>
+    <string name="emailcard">e-mail de contacte</string>
 </resources>

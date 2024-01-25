@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,6 +35,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.wallapetapp.R
@@ -57,17 +60,23 @@ import com.example.wallapetapp.components.TextoEntrarMascota
 import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.domain.model.Mascota
+import com.example.wallapetapp.domain.repository.Mascotas
 import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
-import java.time.LocalDate
+import com.example.wallapetapp.vm.MascotasViewModel
+import java.time.LocalDateTime
 import java.util.Objects
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun WallaEntraMascota(navController: NavHostController) {
+fun WallaEntraMascota(
+    navController: NavHostController,
+    viewModel: MascotasViewModel = hiltViewModel()
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -85,7 +94,10 @@ fun WallaEntraMascota(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                ContenidoWallaEntraMascota(padding, navController)
+                ContenidoWallaEntraMascota(
+                    padding = padding,
+                    navController,
+                    addMascota={mascota-> viewModel.addMascota(mascota)})
             }
         },
         bottomBar = { BarraNav(navController) }
@@ -96,7 +108,8 @@ fun WallaEntraMascota(navController: NavHostController) {
 @Composable
 fun ContenidoWallaEntraMascota(
     padding: PaddingValues,
-    navController: NavHostController
+    navController: NavHostController,
+    addMascota: (mascota: Mascota) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -111,7 +124,7 @@ fun ContenidoWallaEntraMascota(
         var codPostal by remember { mutableStateOf("") }
         var mail by remember { mutableStateOf("") }
         var observaciones by remember { mutableStateOf("") }
-        //var fecha by remember { mutableStateOf("")  }
+        var fecha by remember { mutableStateOf("")  }
         val estaChecked: Boolean
 
         TextoEntrarMascota()
@@ -125,14 +138,17 @@ fun ContenidoWallaEntraMascota(
         CampoTexto(mail, { mail = it }, stringResource(R.string.email))
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
+        fecha = LocalDateTime.now().toString()
         Spacer(modifier = Modifier.padding(5.dp))
         ImagenCamara()
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
+
         //BotonPublicar(estaChecked)
         Button(
             onClick = {
-
-               // navController.popBackStack()
+                val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha )
+                addMascota(mascota)
+                navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),

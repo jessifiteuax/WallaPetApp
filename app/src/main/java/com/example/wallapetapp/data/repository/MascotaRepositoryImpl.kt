@@ -10,6 +10,8 @@ class MascotaRepositoryImpl(
     private val mascotaDao: MascotaDao
     ) : MascotaRepository {
     override fun getMascotas() = mascotaDao.getMascotas()
+    override fun getMascotasByCodpostal(codPostal:String) = mascotaDao.getMascotasByCodpostal(codPostal)
+    override fun getMascotasByPoblacion(poblacion:String) = mascotaDao.getMascotasByPoblacion(poblacion)
     override fun addMascota(mascota: Mascota) = mascotaDao.addMascota(mascota)
     //getMascotas
     //updateMascotas

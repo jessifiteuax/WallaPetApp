@@ -6,7 +6,10 @@ import kotlinx.coroutines.flow.Flow
 typealias Mascotas = List<Mascota>
 interface MascotaRepository {
     fun getMascotas(): Flow<Mascotas>
+    fun getMascotasByCodpostal(codPostal:String):Flow<Mascotas>
+    fun getMascotasByPoblacion(poblacion:String):Flow<Mascotas>
     fun addMascota(mascota: Mascota)
+
     //getMascota
     //updateMascota
     //deleteMascota

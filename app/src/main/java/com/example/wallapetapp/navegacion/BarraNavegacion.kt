@@ -1,15 +1,22 @@
 package com.example.wallapetapp.navegacion
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Textsms
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
+import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.components.textoBarraBottom
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @Composable
@@ -23,24 +30,32 @@ fun BarraNav(navController: NavHostController) {
             selected = false,
             onClick = { navController.navigate("Home") },
             icon = {
-                Icon(
-                    imageVector = Icons.Default.Home,
-                    contentDescription = "Search",
-                    tint = Color.White
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Home,
+                        contentDescription = "Search",
+                        tint = Color.White
+                    )
+                    textoBarraBottom(texto = stringResource(R.string.home))
+                }
             }
-
-
         )
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("AcercaDe") },
             icon = {
-                Icon(
-                    imageVector = Icons.Default.Textsms,
-                    contentDescription = "AcercaDe",
-                    tint = Color.White
-                )
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ){
+                    Icon(
+                        imageVector = Icons.Default.Textsms,
+                        contentDescription = "AcercaDe",
+                        tint = Color.White
+                    )
+                    textoBarraBottom(texto = stringResource(R.string.acerca_de_wallapet))
+                }
             }
         )
     }

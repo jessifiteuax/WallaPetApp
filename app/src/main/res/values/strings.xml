@@ -26,4 +26,5 @@
     <string name="emailcard">e-mail de contacto</string>
     <string name="fecha_de_entrada">Fecha de registro</string>
     <string name="home" translatable="false">Home</string>
+    <string name="Filtrar_codigo_postal">Filtrar por código postal</string>
 </resources>

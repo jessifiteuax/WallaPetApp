@@ -26,4 +26,5 @@
     <string name="poblacioncard">Població en la que es troba</string>
     <string name="codigo_postalcard">Codi postal</string>
     <string name="emailcard">e-mail de contacte</string>
+    <string name="Filtrar_codigo_postal">Filtrar per codi postal</string>
 </resources>

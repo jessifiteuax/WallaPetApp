@@ -143,7 +143,7 @@ fun ContenidoWallaEntraMascota(
         ImagenCamara()
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
 
-        //BotonPublicar(estaChecked)
+
         Button(
             onClick = {
                 val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha )

@@ -8,8 +8,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pets
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -84,6 +89,21 @@ fun checkDatosOK(poblacion: String, codPostal: String, mail: String): Boolean {
         }
     }
     return estaChecked
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CampoTextoFiltro(valor: String = "Desconocido", onValueChange: (String) -> Unit, label: String) {
+    OutlinedTextField(
+        value = valor,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
+        leadingIcon = {
+            Icon(imageVector = Icons.Outlined.Search, tint = Color.Black, contentDescription = "")
+        }
+    )
 }
 
 

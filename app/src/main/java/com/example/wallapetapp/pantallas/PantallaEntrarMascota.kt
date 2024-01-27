@@ -150,10 +150,10 @@ fun ContenidoWallaEntraMascota(
         Spacer(modifier = Modifier.padding(5.dp))
         foto=ImagenCamara()
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
-        Text(foto)
+        //Text(foto)
         Button(
             onClick = {
-                val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha )
+                val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha, foto)
                 addMascota(mascota)
                 navController.popBackStack()
             },
@@ -208,10 +208,6 @@ fun ImagenCamara():String {
                 Toast.makeText(context, "Permiso denegado", Toast.LENGTH_SHORT).show()
             }
         }
-    /*val saveImageRoom = {imageUri: Uri ->
-        val imagePath = context.saveImageToRoom(imageUri)
-    }*/
-    val imagePath = context.saveImageToRoom(uri)
 
     Row {
         Button(
@@ -242,6 +238,7 @@ fun ImagenCamara():String {
             contentDescription = null
         )
     }
+    val imagePath = context.saveImageToRoom(uri)
     return imagePath
 }
 

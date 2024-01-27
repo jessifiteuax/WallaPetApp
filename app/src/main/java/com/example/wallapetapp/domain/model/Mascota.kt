@@ -14,6 +14,6 @@ data class Mascota(
     val codPostal: String,
     val mail: String,
     val observaciones: String,
-    val fecha: String
-    //val foto: Picture
+    val fecha: String,
+    val foto: String
 )

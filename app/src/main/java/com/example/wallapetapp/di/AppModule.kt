@@ -22,7 +22,7 @@ class AppModule {
     ) = Room.databaseBuilder(context,
         MascotaDB::class.java,
         "mascotasTable"
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     @Provides
     fun provideMascotaDao(

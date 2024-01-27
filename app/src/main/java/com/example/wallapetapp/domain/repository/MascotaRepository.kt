@@ -8,7 +8,4 @@ interface MascotaRepository {
     fun getMascotas(): Flow<Mascotas>
     fun addMascota(mascota: Mascota)
 
-    //getMascota
-    //updateMascota
-    //deleteMascota
 }

@@ -17,7 +17,5 @@ interface MascotaDao {
     @Insert(onConflict = IGNORE)
     fun addMascota(mascota: Mascota)
 
-    //getMascota
-    //updateMascota
-    //deleteMascota
+
 }

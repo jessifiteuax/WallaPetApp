@@ -10,7 +10,7 @@
 
 ## Qué es y por qué usar Wallapet
 
-Los amantes de los animales siempre viven con el temor de perder su mascota, es entonces cuando tienes que pensar en la cantidad de sitios donde consultar para ver si alguien lo ha encontrado y dónde puede estar: policias locales, refugios municipales, protectoras, redes sociales, ...
+Los amantes de los animales siempre viven con el temor de perder su mascota, es entonces cuando tienes que pensar en la cantidad de sitios donde consultar para ver si alguien lo ha encontrado y dónde puede estar: policías locales, refugios municipales, protectoras, redes sociales, ...
 Wallapet nace de la idea de aunar a particulares y profesionales en un mismo espacio donde encontrar nuestras mascotas y para fomentar y promover la adopción canina y felina. 
 
 El usuario, tanto particular como profesional, podrá acceder mediante un parámetro de búsqueda (filtro) a un listado de perros y gatos encontrados y en adopción.  

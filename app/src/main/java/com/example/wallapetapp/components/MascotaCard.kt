@@ -45,6 +45,7 @@ fun MascotaCard(mascota: Mascota) {
                 TextoCardDatos(texto = mascota.observaciones)
                 TextoCardTitulos(texto = stringResource(R.string.fecha_de_entrada))
                 TextoCardDatos(texto = mascota.fecha)
+                TextoCardDatos(texto = mascota.foto)
             }
         }
     }

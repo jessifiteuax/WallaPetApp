@@ -3,9 +3,11 @@
 package com.example.wallapetapp.pantallas
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -66,8 +68,13 @@ import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.MascotasViewModel
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.Date
 import java.util.Objects
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -125,6 +132,7 @@ fun ContenidoWallaEntraMascota(
         var mail by remember { mutableStateOf("") }
         var observaciones by remember { mutableStateOf("") }
         var fecha by remember { mutableStateOf("")  }
+        var foto: String
         val estaChecked: Boolean
 
         TextoEntrarMascota()
@@ -140,13 +148,12 @@ fun ContenidoWallaEntraMascota(
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         fecha = LocalDateTime.now().toString()
         Spacer(modifier = Modifier.padding(5.dp))
-        ImagenCamara()
+        foto=ImagenCamara()
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
-
-
+        //Text(foto)
         Button(
             onClick = {
-                val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha )
+                val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha, foto)
                 addMascota(mascota)
                 navController.popBackStack()
             },
@@ -167,7 +174,6 @@ fun ContenidoWallaEntraMascota(
                 text = stringResource(R.string.publicar),
                 fontSize = 16.sp
             )
-
         }
     }
     Box(
@@ -179,7 +185,7 @@ fun ContenidoWallaEntraMascota(
 }
 
 @Composable
-fun ImagenCamara() {
+fun ImagenCamara():String {
 
     val context = LocalContext.current
     val file = context.createImageFile()
@@ -202,6 +208,7 @@ fun ImagenCamara() {
                 Toast.makeText(context, "Permiso denegado", Toast.LENGTH_SHORT).show()
             }
         }
+
     Row {
         Button(
             modifier = Modifier
@@ -231,4 +238,43 @@ fun ImagenCamara() {
             contentDescription = null
         )
     }
+    val imagePath = context.saveImageToRoom(uri)
+    return imagePath
 }
+
+@SuppressLint("SimpleDateFormat")
+fun Context.saveImageToRoom(imageUri: Uri): String {
+    val timeStamp = SimpleDateFormat("yyyMMdd_HHmmss").format(Date())
+    val imageFileName = "JPEG_$timeStamp.jpg"
+    val outputDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    val outputFile = File(outputDir, imageFileName)
+
+    val inputStream = contentResolver.openInputStream(imageUri)
+    val outputStream = FileOutputStream(outputFile)
+
+    inputStream?.use { input ->
+        outputStream.use { output ->
+            input.copyTo(output)
+        }
+    }
+    return outputFile.absolutePath
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

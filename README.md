@@ -25,7 +25,7 @@ Wallapet tiene una interfaz sencilla e intuitiva. Al abrir la aplicación nos da
 - Quiero ver mascotas perdidas
 - Quiero entrar una nueva mascota
   
-En todo momento de la aplicación, tendremos presente una barra inferior donde podremos ir directamente a la pantalla principal a través del icono de la izquierda: ![IconoHome](https://github.com/jessifiteuax/WallaPetApp/assets/156848338/547d11de-9ebb-4371-ad43-71b4ecfdd9e1)  o a la pantalla Acerca De a través del icono de la derecha: ![IconoAcercaDe](https://github.com/jessifiteuax/WallaPetApp/assets/156848338/ed8b1b54-bcff-4119-8f07-c24660b946d5)
+En todo momento de la aplicación, tendremos presente una barra inferior donde podremos ir directamente a la pantalla principal o a la pantalla 'Acerca De' a través de los iconos de la barra inferior.
 
 
 ### Quiero ver mascotas perdidas

@@ -150,7 +150,7 @@ fun ContenidoWallaEntraMascota(
         Spacer(modifier = Modifier.padding(5.dp))
         foto=ImagenCamara()
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
-        //Text(foto)
+
         Button(
             onClick = {
                 val mascota = Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha, foto)

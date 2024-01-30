@@ -46,18 +46,8 @@ fun MascotaCard(mascota: Mascota) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                //PhotoView(imagePath = mascota.foto)
-                //Text(text = mascota.foto)
-                val ctx = LocalContext.current
-                val bitmap = getBitmapFromImage(ctx, R.drawable.fotodefecto)
-                Image(
-                    modifier = Modifier
-                        .height(200.dp)
-                        .width(200.dp),
-                    bitmap = bitmap.asImageBitmap(),
-                    contentDescription = "Android",
-                    alignment = Alignment.Center
-                )
+                PhotoView(imagePath = mascota.foto)
+                Text(text = mascota.foto)
 
                 TextoCardTitulos(texto = stringResource(R.string.nombre))
                 TextoCardDatos(texto = mascota.nombre)
@@ -80,11 +70,10 @@ fun MascotaCard(mascota: Mascota) {
 fun PhotoView(imagePath: String) {
     Text(text = "Entro en PhotoView")
     Text(text = imagePath)
-
     val bitmap = remember {
         try {
             val file = File(imagePath)
-            BitmapFactory.decodeFile(file.path)
+            BitmapFactory.decodeFile(file.absolutePath)
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -104,18 +93,4 @@ fun PhotoView(imagePath: String) {
 }
 //BitmapFactory.decodeResource(getResources(), R.id.arrow)
 
-private fun getBitmapFromImage(context: Context, drawable: Int): Bitmap {
 
-    val db = ContextCompat.getDrawable(context, drawable)
-
-    val bit = Bitmap.createBitmap(
-        db!!.intrinsicWidth, db.intrinsicHeight, Bitmap.Config.ARGB_8888
-    )
-
-    val canvas = android.graphics.Canvas(bit)
-    db.setBounds(0, 0, canvas.width, canvas.height)
-
-    db.draw(canvas)
-
-    return bit
-}

@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,11 +36,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,7 +61,6 @@ import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
-import com.example.wallapetapp.domain.repository.Mascotas
 import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
@@ -238,7 +235,7 @@ fun ImagenCamara():String {
             contentDescription = null
         )
     }
-    val imagePath = context.saveImageToRoom(uri)
+    val imagePath = context.saveImageToRoom(imageUri = uri)
     return imagePath
 }
 
@@ -246,8 +243,13 @@ fun ImagenCamara():String {
 fun Context.saveImageToRoom(imageUri: Uri): String {
     val timeStamp = SimpleDateFormat("yyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_$timeStamp.jpg"
-    val outputDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val outputFile = File(outputDir, imageFileName)
+    //val outputDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    val picturesDirectory =
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+
+    val picturesPath = picturesDirectory.absolutePath
+    //val outputFile = File(outputDir, imageFileName)
+    val outputFile = File(picturesPath,imageFileName)
 
     val inputStream = contentResolver.openInputStream(imageUri)
     val outputStream = FileOutputStream(outputFile)

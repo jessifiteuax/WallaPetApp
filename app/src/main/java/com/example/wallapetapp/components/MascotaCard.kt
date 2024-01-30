@@ -1,26 +1,34 @@
 package com.example.wallapetapp.components
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.example.wallapetapp.R
 import com.example.wallapetapp.domain.model.Mascota
+import kotlinx.coroutines.NonDisposableHandle.parent
 import java.io.File
+
 
 @Composable
 fun MascotaCard(mascota: Mascota) {
@@ -30,7 +38,7 @@ fun MascotaCard(mascota: Mascota) {
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -39,7 +47,8 @@ fun MascotaCard(mascota: Mascota) {
         ) {
             Column {
                 PhotoView(imagePath = mascota.foto)
-                TextoCardDatos(texto = mascota.foto)
+                Text(text = mascota.foto)
+
                 TextoCardTitulos(texto = stringResource(R.string.nombre))
                 TextoCardDatos(texto = mascota.nombre)
                 TextoCardTitulos(texto = stringResource(R.string.poblacioncard))
@@ -58,23 +67,30 @@ fun MascotaCard(mascota: Mascota) {
 }
 
 @Composable
-fun PhotoView(imagePath: String){
+fun PhotoView(imagePath: String) {
+    Text(text = "Entro en PhotoView")
+    Text(text = imagePath)
     val bitmap = remember {
-        try{
+        try {
             val file = File(imagePath)
-            BitmapFactory.decodeFile(file.path)
-        }catch (e:Exception){
+            BitmapFactory.decodeFile(file.absolutePath)
+        } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
-    if(bitmap!=null){
-        Image(bitmap=bitmap.asImageBitmap(),
+    if (bitmap != null) {
+
+        Image(
+            bitmap = bitmap.asImageBitmap(),
             contentDescription = "",
             modifier = Modifier
                 .padding(15.dp)
         )
-    }else{
+    } else {
         Text(text = "Error al cargar la imagen")
     }
 }
+//BitmapFactory.decodeResource(getResources(), R.id.arrow)
+
+

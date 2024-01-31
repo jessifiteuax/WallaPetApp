@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.wallapetapp.pantallas.CameraScreen
 import com.example.wallapetapp.pantallas.WallaAcercaDe
 import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.pantallas.WallaHome
@@ -27,6 +28,9 @@ fun navigation() {
         }
         composable("AcercaDe") {
             WallaAcercaDe(navController)
+        }
+        composable("Camera") {
+            CameraScreen(navController)
         }
     }
 }

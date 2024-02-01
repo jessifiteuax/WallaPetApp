@@ -2,19 +2,24 @@
 
 package com.example.wallapetapp.pantallas
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
+import android.provider.MediaStore
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.camera.core.AspectRatio
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.Image
@@ -32,10 +37,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ThumbUpOffAlt
+import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -51,10 +59,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -76,15 +84,15 @@ import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.MascotasViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import java.io.File
-import java.io.FileOutputStream
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.concurrent.Executor
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.isGranted
+import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Objects
-import java.util.concurrent.Executor
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -122,6 +130,7 @@ fun WallaEntraMascota(
     )
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ContenidoWallaEntraMascota(
@@ -159,31 +168,10 @@ fun ContenidoWallaEntraMascota(
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         fecha = LocalDateTime.now().toString()
         Spacer(modifier = Modifier.padding(5.dp))
-        //foto=ImagenCamara()
+        ImagenCamara()
         foto = ""
-
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
-        Row {
-            Button(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(22.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFC03D69),
-                    contentColor = Color.White
-                ),
-                onClick = {  navController.navigate("Camera") }) {
-                Text(text = stringResource(R.string.hazle_una_foto))
-            }
-            Spacer(modifier = Modifier.width(5.dp))
-            Image(
-                modifier = Modifier
-                    .size(80.dp)
-                    .weight(0.7f),
-                painter = rememberAsyncImagePainter(model = R.drawable.fotodefecto),
-                contentDescription = null
-            )
-        }
+
 
         Button(
             onClick = {
@@ -220,117 +208,38 @@ fun ContenidoWallaEntraMascota(
 }
 
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun ImagenCamara() {
-    val permissionState = rememberPermissionState(permission = android.Manifest.permission.CAMERA)
-    val context = LocalContext.current
-    val cameraController = remember {
-        LifecycleCameraController(context)
-    }
-    val lifecycle = LocalLifecycleOwner.current
-
-    Row {
-        Button(
-            modifier = Modifier
-                .weight(1f)
-                .padding(22.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFC03D69),
-                contentColor = Color.White
-            ),
-            onClick = {
-
-                /*val permissionCheckResult =
-                    ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
-                if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
-                    cameraLauncher.launch(uri)
-                } else {
-                    permissionLauncher.launch(android.Manifest.permission.CAMERA)
-                }*/
-            }) {
-            Text(text = stringResource(R.string.hazle_una_foto))
-        }
-        Spacer(modifier = Modifier.width(5.dp))
-        /*Image(
-            modifier = Modifier
-                .size(80.dp)
-                .weight(0.7f),
-            painter = rememberAsyncImagePainter(if (image.path?.isNotEmpty() == true) image else imageDefault),
-            contentDescription = null
-        )*/
-    }
-
-}
-
-
-private fun takePicture(cameraController: LifecycleCameraController, executor: Executor) {
-    val file = File.createTempFile("imagentest", ".jpg")
-    val outputDirectory = ImageCapture.OutputFileOptions.Builder(file).build()
-    cameraController.takePicture(
-        outputDirectory,
-        executor,
-        object : ImageCapture.OnImageSavedCallback {
-            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                println(outputFileResults.savedUri)
-            }
-
-            override fun onError(exception: ImageCaptureException) {
-                println()
-            }
-        },
-    )
-}
-
-@Composable
-fun CamaraComposable(
-    cameraController: LifecycleCameraController,
-    lifecycle: LifecycleOwner
-) {
-    cameraController.bindToLifecycle(lifecycle)
-    AndroidView(factory = { context ->
-        val previewView = PreviewView(context).apply {
-            layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-            )
-        }
-        previewView.controller = cameraController
-
-        previewView
-    })
-}
-
-
-/*@Composable
-fun ImagenCamara():String {
-
     val context = LocalContext.current
     val file = context.createImageFile()
     val uri = FileProvider.getUriForFile(
         Objects.requireNonNull(context),
         context.packageName + ".provider", file
     )
-    var image by remember { mutableStateOf<Uri>(Uri.EMPTY) }
-    val imageDefault = R.drawable.fotodefecto
+    var capturedImageUri by remember {
+        mutableStateOf<Uri>(Uri.EMPTY)
+    }
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-            image = uri
+            capturedImageUri = uri
         }
-    val permissionLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
-            if (it) {
-                Toast.makeText(context, "Permiso concedido", Toast.LENGTH_SHORT).show()
-                cameraLauncher.launch(uri)
-            } else {
-                Toast.makeText(context, "Permiso denegado", Toast.LENGTH_SHORT).show()
-            }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        if (it) {
+            Toast.makeText(context, "Permiso concedido", Toast.LENGTH_SHORT).show()
+            cameraLauncher.launch(uri)
+        } else {
+            Toast.makeText(context, "Permiso denegado", Toast.LENGTH_SHORT).show()
         }
+    }
+
 
     Row {
         Button(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.5f)
                 .padding(22.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFC03D69),
@@ -338,29 +247,51 @@ fun ImagenCamara():String {
             ),
             onClick = {
                 val permissionCheckResult =
-                    ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+
                 if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
                     cameraLauncher.launch(uri)
                 } else {
-                    permissionLauncher.launch(android.Manifest.permission.CAMERA)
+                    permissionLauncher.launch(Manifest.permission.CAMERA)
                 }
             }) {
             Text(text = stringResource(R.string.hazle_una_foto))
         }
-        Spacer(modifier = Modifier.width(5.dp))
+    }
+    Spacer(modifier = Modifier.width(5.dp))
+    if (capturedImageUri.path?.isNotEmpty() == true) {
         Image(
             modifier = Modifier
-                .size(80.dp)
-                .weight(0.7f),
-            painter = rememberAsyncImagePainter(if (image.path?.isNotEmpty() == true) image else imageDefault),
+                .size(80.dp),
+            painter = rememberAsyncImagePainter(capturedImageUri),
+            contentDescription = null
+        )
+    } else {
+        Image(
+            modifier = Modifier
+                .size(80.dp),
+            painter = painterResource(id = R.drawable.fotodefecto),
             contentDescription = null
         )
     }
-    //val imagePath = context.saveImageToRoom(imageUri = uri)
-    //return imagePath
-}*/
+    //val fileCaptured = context.createImageFile(capturedImageUri)
 
-/*@SuppressLint("SimpleDateFormat")
+}
+
+fun Context.createImageFile(): File {
+    val timeStamp = SimpleDateFormat("yyyy_MM_dd_HH:mm:ss").format(Date())
+    val imageFileName = "JPEG_" + timeStamp + "_"
+    val image = File.createTempFile(
+        imageFileName,
+        ".jpg",
+        externalCacheDir
+    )
+    return image
+}
+
+/*
+
+@SuppressLint("SimpleDateFormat")
 fun Context.saveImageToRoom(imageUri: Uri): String {
     val timeStamp = SimpleDateFormat("yyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_$timeStamp.jpg"
@@ -381,13 +312,8 @@ fun Context.saveImageToRoom(imageUri: Uri): String {
         }
     }
     return outputFile.absolutePath
-}*/
-
-
-
-
-
-
+}
+ */
 
 
 

@@ -10,23 +10,29 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CameraAlt
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
+import com.example.wallapetapp.components.iconoBarra
+import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -47,7 +53,19 @@ fun CameraScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
         permissionState.launchPermissionRequest()
     }
-    Scaffold(modifier = Modifier.fillMaxSize(), floatingActionButton = {
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = { textoBarra(texto = "PhotoCall") },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = WallaColTopBar
+                ),
+                navigationIcon = {
+                    iconoBarra(navController)
+                }
+            )
+        },
+        floatingActionButton = {
         FloatingActionButton(onClick = {
             val executor = ContextCompat.getMainExecutor(context)
             takePicture(cameraController, executor)
@@ -57,12 +75,14 @@ fun CameraScreen(navController: NavHostController) {
     },
         floatingActionButtonPosition = FabPosition.Center
     ) {
+
         if (permissionState.status.isGranted) {
-            CamaraComposable(cameraController, lifecycle, modifier = Modifier.padding(it))
+            CamaraModule(cameraController, lifecycle, modifier = Modifier.padding(it))
         } else {
             Text(text = "Permiso Denegado!", modifier = Modifier.padding(it))
         }
     }
+
 }
 
 private fun takePicture(cameraController: LifecycleCameraController, executor: Executor) {
@@ -83,7 +103,7 @@ private fun takePicture(cameraController: LifecycleCameraController, executor: E
 }
 
 @Composable
-fun CamaraComposable(
+fun CamaraModule(
     cameraController: LifecycleCameraController,
     lifecycle: LifecycleOwner,
     modifier: Modifier = Modifier,

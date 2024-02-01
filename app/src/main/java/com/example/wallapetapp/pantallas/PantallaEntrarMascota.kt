@@ -4,24 +4,24 @@ package com.example.wallapetapp.pantallas
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
+import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.provider.MediaStore
-import android.view.ViewGroup
+import android.os.Environment
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.annotation.RequiresApi
-import androidx.camera.core.AspectRatio
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.LifecycleCameraController
-import androidx.camera.view.PreviewView
+import androidx.camera.core.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -37,13 +38,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ThumbUpOffAlt
-import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -53,10 +51,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -68,6 +68,7 @@ import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.wallapetapp.R
@@ -79,17 +80,14 @@ import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
-import com.example.wallapetapp.fotos.createImageFile
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.MascotasViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import java.io.File
+import java.io.FileOutputStream
 import java.time.LocalDateTime
-import java.util.concurrent.Executor
-import com.google.accompanist.permissions.PermissionState
-import com.google.accompanist.permissions.isGranted
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Objects
@@ -207,9 +205,9 @@ fun ContenidoWallaEntraMascota(
     }
 }
 
-
 @Composable
-fun ImagenCamara() {
+fun ImagenCamara()
+{
     val context = LocalContext.current
     val file = context.createImageFile()
     val uri = FileProvider.getUriForFile(
@@ -220,21 +218,25 @@ fun ImagenCamara() {
         mutableStateOf<Uri>(Uri.EMPTY)
     }
     val cameraLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
+        rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()){
             capturedImageUri = uri
         }
-
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
-    ) {
-        if (it) {
+    ){
+        if (it)
+        {
             Toast.makeText(context, "Permiso concedido", Toast.LENGTH_SHORT).show()
             cameraLauncher.launch(uri)
-        } else {
+        }
+        else
+        {
             Toast.makeText(context, "Permiso denegado", Toast.LENGTH_SHORT).show()
         }
     }
 
+    val getImagePath = { imageUri: Uri ->
+        val imagePath = context.createImagePath(imageUri)}//tengo el path absoluto de la foto
 
     Row {
         Button(
@@ -246,27 +248,32 @@ fun ImagenCamara() {
                 contentColor = Color.White
             ),
             onClick = {
-                val permissionCheckResult =
-                    ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
-
-                if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
-                    cameraLauncher.launch(uri)
-                } else {
-                    permissionLauncher.launch(Manifest.permission.CAMERA)
-                }
-            }) {
+            val permissionCheckResult =
+                ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+            if (permissionCheckResult == PackageManager.PERMISSION_GRANTED)
+            {
+                cameraLauncher.launch(uri)
+            }
+            else
+            {
+                permissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+        }) {
             Text(text = stringResource(R.string.hazle_una_foto))
         }
     }
-    Spacer(modifier = Modifier.width(5.dp))
-    if (capturedImageUri.path?.isNotEmpty() == true) {
+    if (capturedImageUri.path?.isNotEmpty() == true)
+    {
         Image(
             modifier = Modifier
                 .size(80.dp),
             painter = rememberAsyncImagePainter(capturedImageUri),
             contentDescription = null
         )
-    } else {
+        getImagePath(capturedImageUri)
+    }
+    else
+    {
         Image(
             modifier = Modifier
                 .size(80.dp),
@@ -274,34 +281,27 @@ fun ImagenCamara() {
             contentDescription = null
         )
     }
-    //val fileCaptured = context.createImageFile(capturedImageUri)
-
 }
-
-fun Context.createImageFile(): File {
-    val timeStamp = SimpleDateFormat("yyyy_MM_dd_HH:mm:ss").format(Date())
-    val imageFileName = "JPEG_" + timeStamp + "_"
-    val image = File.createTempFile(
-        imageFileName,
-        ".jpg",
-        externalCacheDir
-    )
-    return image
-}
-
-/*
 
 @SuppressLint("SimpleDateFormat")
-fun Context.saveImageToRoom(imageUri: Uri): String {
-    val timeStamp = SimpleDateFormat("yyyMMdd_HHmmss").format(Date())
-    val imageFileName = "JPEG_$timeStamp.jpg"
-    //val outputDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val picturesDirectory =
-        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+fun Context.createImageFile(): File{
+    val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+    val imageDirectory = getExternalFilesDir((Environment.DIRECTORY_PICTURES))
+    val imageFileName = "JPEG_" + timeStamp + "_"
+    return File.createTempFile(
+        imageFileName,
+        ".jpg",
+        imageDirectory
+    )
+}
 
-    val picturesPath = picturesDirectory.absolutePath
-    //val outputFile = File(outputDir, imageFileName)
-    val outputFile = File(picturesPath,imageFileName)
+@SuppressLint("SimpleDateFormat")
+fun Context.createImagePath(imageUri: Uri): String {
+    val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+    val imageFileName = "JPEG_$timeStamp.jpg"
+
+    val outputDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    val outputFile = File(outputDir, imageFileName)
 
     val inputStream = contentResolver.openInputStream(imageUri)
     val outputStream = FileOutputStream(outputFile)
@@ -311,14 +311,10 @@ fun Context.saveImageToRoom(imageUri: Uri): String {
             input.copyTo(output)
         }
     }
+
     return outputFile.absolutePath
+
 }
- */
-
-
-
-
-
 
 
 

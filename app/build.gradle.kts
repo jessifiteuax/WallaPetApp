@@ -80,7 +80,18 @@ dependencies {
     implementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+
+    //camera
     implementation("io.coil-kt:coil-compose:2.3.0")
+
+    //CameraX
+    implementation ("com.google.accompanist:accompanist-permissions:0.28.0")
+    val camerax_version = "1.3.0-rc01"
+    implementation ("androidx.camera:camera-camera2:${camerax_version}")
+    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation ("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-core:${camerax_version}")
+
 
     // Room
     implementation("androidx.room:room-runtime:2.5.0")

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -236,7 +237,10 @@ fun ImagenCamara()
     }
 
     val getImagePath = { imageUri: Uri ->
-        val imagePath = context.createImagePath(imageUri)}//tengo el path absoluto de la foto
+        val imagePath = context.createImagePath(imageUri)
+        //recogerImagePath (imagePath)
+    }//tengo el path absoluto de la foto
+
 
     Row {
         Button(
@@ -316,6 +320,9 @@ fun Context.createImagePath(imageUri: Uri): String {
 
 }
 
+/* fun recogerImagePath(imagePath : String){
+
+ }*/
 
 
 

@@ -27,4 +27,5 @@
     <string name="codigo_postalcard">Codi postal</string>
     <string name="emailcard">e-mail de contacte</string>
     <string name="Filtrar_codigo_postal">Filtrar per codi postal</string>
+    <string name="actualizar">Actualitzar</string>
 </resources>

@@ -30,3 +30,15 @@ fun iconoBarra(navController: NavHostController) {
 fun textoBarraBottom(texto: String){
     Text(text = texto, fontSize = 12.sp, color = Color.White, fontFamily = LemonFamily)
 }
+
+@Composable
+fun iconoBarraUpdate(
+    navigateBack: () -> Unit
+) {
+    IconButton(onClick = { navigateBack})
+    {
+        Icon(imageVector = Icons.Filled.ArrowBack,
+            contentDescription = null,
+            tint = Color.White)
+    }
+}

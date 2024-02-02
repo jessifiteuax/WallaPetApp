@@ -11,4 +11,7 @@ class MascotaRepositoryImpl(
     ) : MascotaRepository {
     override fun getMascotas() = mascotaDao.getMascotas()
     override fun addMascota(mascota: Mascota) = mascotaDao.addMascota(mascota)
+    override fun deleteMascota(mascota: Mascota) = mascotaDao.deleteMascota(mascota)
+    override fun getMascota(id: Int): Mascota = mascotaDao.getMascota(id)
+    override fun updateMascota(mascota: Mascota) = mascotaDao.updateMascota(mascota)
     }

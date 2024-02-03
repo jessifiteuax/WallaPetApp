@@ -39,7 +39,9 @@ fun CampoTexto(valor: String = "Desconocido", onValueChange: (String) -> Unit, l
         label = { Text(text = label) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 30.dp)
+            .padding(horizontal = 30.dp),
+        maxLines = 1,
+        singleLine = true
     )
 }
 
@@ -53,7 +55,25 @@ fun CampoTextoNum(valor: String = "", onValueChange: (String) -> Unit, label: St
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 30.dp)
+            .padding(horizontal = 30.dp),
+        maxLines = 1,
+        singleLine = true
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CampoTextoMail(valor: String = "", onValueChange: (String) -> Unit, label: String) {
+    OutlinedTextField(
+        value = valor,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 30.dp),
+        maxLines = 1,
+        singleLine = true
     )
 }
 
@@ -99,6 +119,8 @@ fun CampoTextoFiltro(valor: String = "Desconocido", onValueChange: (String) -> U
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 30.dp),
+        maxLines = 1,
+        singleLine = true,
         leadingIcon = {
             Icon(imageVector = Icons.Outlined.Search, tint = Color.Black, contentDescription = "")
         }

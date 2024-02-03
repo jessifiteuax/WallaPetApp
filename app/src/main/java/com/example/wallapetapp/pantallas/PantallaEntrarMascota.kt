@@ -74,6 +74,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.wallapetapp.R
 import com.example.wallapetapp.components.CampoTexto
+import com.example.wallapetapp.components.CampoTextoMail
 import com.example.wallapetapp.components.CampoTextoNum
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoEntrarMascota
@@ -162,7 +163,7 @@ fun ContenidoWallaEntraMascota(
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTextoNum(codPostal, { codPostal = it }, stringResource(R.string.codigo_postal))
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(mail, { mail = it }, stringResource(R.string.email))
+        CampoTextoMail(mail, { mail = it }, stringResource(R.string.email))
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(observaciones, { observaciones = it }, stringResource(R.string.observaciones))
         fecha = LocalDateTime.now().toString()

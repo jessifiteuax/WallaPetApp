@@ -32,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
 import com.example.wallapetapp.components.CampoTexto
+import com.example.wallapetapp.components.CampoTextoMail
 import com.example.wallapetapp.components.CampoTextoNum
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoUpdateMascota
@@ -135,7 +136,7 @@ fun ContenidoMascota(
             stringResource(R.string.codigo_postal)
         )
         Spacer(modifier = Modifier.padding(5.dp))
-        CampoTexto(mascota.mail, { mail -> updateMail(mail) }, stringResource(R.string.email))
+        CampoTextoMail(mascota.mail, { mail -> updateMail(mail) }, stringResource(R.string.email))
         Spacer(modifier = Modifier.padding(5.dp))
         CampoTexto(
             mascota.observaciones,

@@ -8,6 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.wallapetapp.components.MascotaCard
+import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.pantallas.PantallaUpdateMascota
 import com.example.wallapetapp.pantallas.WallaAcercaDe
 import com.example.wallapetapp.pantallas.WallaEntraMascota
@@ -28,30 +30,49 @@ fun navigation() {
         composable("AcercaDe") {
             WallaAcercaDe(navController)
         }
-        composable("Mascotas"){
+        composable("Mascotas") {
             WallaMascotas(navController,
-                navigateToPantallaUpdateMascota = {
-                        mascotaId ->
+                navigateToPantallaUpdateMascota = { mascotaId ->
                     navController.navigate(
-                        "UpdateMascota/$mascotaId")
-                }
+                        "UpdateMascota/$mascotaId"
+                    )
+                },
+                navigateToPantallaMapas = { codPostal ->
+                    navController.navigate(
+                        "Mapas/$codPostal"
+                    )
+                },
             )
         }
         composable(
             route = "UpdateMascota/{mascotaId}",
             arguments = listOf(
-                navArgument("mascotaId"){
+                navArgument("mascotaId") {
                     type = NavType.IntType
                 }
             )
         ) { backStackEntry ->
             val mascotaId = backStackEntry.arguments?.getInt("mascotaId") ?: 0
-            PantallaUpdateMascota(navController,
+            PantallaUpdateMascota(
+                navController,
                 mascotaId = mascotaId,
                 navigateBack = {
                     navController.popBackStack()
                 },
-
+                )
+        }
+        composable(
+            route = "Mapas/{codPostal}",
+            arguments = listOf(
+                navArgument("codPostal") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val codPostal = backStackEntry.arguments?.getString("codPostal") ?: ""
+            Maps(
+                navController,
+                codPostal = codPostal
             )
         }
     }

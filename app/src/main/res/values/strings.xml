@@ -28,4 +28,6 @@
     <string name="home" translatable="false">Home</string>
     <string name="Filtrar_codigo_postal">Filtrar por código postal</string>
     <string name="actualizar">Actualizar</string>
+    <string name="actualiza_datos">Actualiza los datos</string>
+    <string name="modifica_los_datos_necesarios">Modifica los datos necesarios</string>
 </resources>

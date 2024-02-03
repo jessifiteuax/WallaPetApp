@@ -1,6 +1,7 @@
 package com.example.wallapetapp.pantallas
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pets
-import androidx.compose.material.icons.filled.ThumbUpOffAlt
-import androidx.compose.material.icons.outlined.Pets
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -30,21 +29,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoNum
+import com.example.wallapetapp.components.ImagenLogo
+import com.example.wallapetapp.components.TextoUpdateMascota
 import com.example.wallapetapp.components.checkDatosOK
 import com.example.wallapetapp.components.iconoBarra
-import com.example.wallapetapp.components.iconoBarraUpdate
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
-import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.MascotasViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaUpdateMascota(
+    navHostController: NavHostController,
     viewModel: MascotasViewModel = hiltViewModel(),
     mascotaId: Int,
     navigateBack: () -> Unit
@@ -56,12 +57,12 @@ fun PantallaUpdateMascota(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { textoBarra(texto = stringResource(R.string.acerca_de_wallapet)) },
+                title = { textoBarra(texto = stringResource(R.string.actualiza_datos)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
                 navigationIcon = {
-                    iconoBarraUpdate(navigateBack)
+                    iconoBarra(navHostController)
                 }
             )
         },
@@ -113,8 +114,9 @@ fun ContenidoMascota(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val estaChecked: Boolean
 
+        TextoUpdateMascota()
+        Spacer(modifier = Modifier.padding(30.dp))
         CampoTexto(
             mascota.nombre,
             { nombre -> updateNombre(nombre) },
@@ -141,7 +143,7 @@ fun ContenidoMascota(
             stringResource(R.string.observaciones)
         )
         Spacer(modifier = Modifier.padding(5.dp))
-        estaChecked = checkDatosOK(mascota.poblacion, mascota.codPostal, mascota.mail)
+        val estaChecked: Boolean = checkDatosOK(mascota.poblacion, mascota.codPostal, mascota.mail)
 
         Button(
             onClick = {
@@ -172,6 +174,11 @@ fun ContenidoMascota(
                 contentDescription = ""
             )
         }
-
+    }
+    Box(
+        Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        ImagenLogo()
     }
 }

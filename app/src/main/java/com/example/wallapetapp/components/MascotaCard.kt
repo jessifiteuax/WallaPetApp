@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,11 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.wallapetapp.R
 import com.example.wallapetapp.domain.model.Mascota
+import com.example.wallapetapp.ui.theme.WallaColTopBar
 import java.io.File
 
 
@@ -41,7 +45,6 @@ fun MascotaCard(mascota: Mascota,
             .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-        onClick = {navigateToUpdateMascotaScreen(mascota.id)}
     ) {
         Row(
             modifier = Modifier
@@ -65,8 +68,16 @@ fun MascotaCard(mascota: Mascota,
                 TextoCardDatos(texto = mascota.observaciones)
                 TextoCardTitulos(texto = stringResource(R.string.fecha_de_entrada))
                 TextoCardDatos(texto = mascota.fecha)
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.padding(10.dp))
+                Divider(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp), thickness = 5.dp, color = WallaColTopBar)
                 Row {
+                    IconButton(onClick = {navigateToUpdateMascotaScreen(mascota.id)},
+                        modifier = Modifier.weight(0.5f)) {
+                        Icon(imageVector = Icons.Outlined.Edit, contentDescription = "Modificar")
+                    }
                     IconButton(onClick = deleteMascota,
                         modifier = Modifier.weight(0.5f)) {
                         Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Borrar")

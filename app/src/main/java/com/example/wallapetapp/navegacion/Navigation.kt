@@ -46,11 +46,12 @@ fun navigation() {
             )
         ) { backStackEntry ->
             val mascotaId = backStackEntry.arguments?.getInt("mascotaId") ?: 0
-            PantallaUpdateMascota(
+            PantallaUpdateMascota(navController,
                 mascotaId = mascotaId,
                 navigateBack = {
                     navController.popBackStack()
-                }
+                },
+
             )
         }
     }

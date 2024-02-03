@@ -64,7 +64,6 @@ fun checkDatosOK(poblacion: String, codPostal: String, mail: String): Boolean {
 
     Box{
         Row(
-            //modifier = Modifier.padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
             ) {

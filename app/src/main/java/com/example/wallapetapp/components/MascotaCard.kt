@@ -17,6 +17,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -36,8 +37,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
 import com.example.wallapetapp.domain.model.Mascota
+import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import java.io.File
 
@@ -46,8 +50,10 @@ import java.io.File
 @Composable
 fun MascotaCard(
     mascota: Mascota,
+    navController: NavHostController,
     deleteMascota: () -> Unit,
-    navigateToUpdateMascotaScreen: (mascotaId: Int) -> Unit) {
+    navigateToUpdateMascotaScreen: (mascotaId: Int) -> Unit,
+    navigateToPantallaMapas: (codPostal: String) -> Unit) {
 
     var verAlertaBorrado by remember { mutableStateOf(false) }
 
@@ -89,6 +95,14 @@ fun MascotaCard(
 
                 Row {
                     IconButton(
+                        onClick = {navigateToPantallaMapas(mascota.codPostal) },
+                        modifier = Modifier.weight(0.5f)
+                    ) {
+                        Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Maps")
+                    }
+
+
+                    IconButton(
                         onClick = { navigateToUpdateMascotaScreen(mascota.id) },
                         modifier = Modifier.weight(0.5f)
                     ) {
@@ -96,13 +110,13 @@ fun MascotaCard(
                     }
                     IconButton(
                         onClick = { verAlertaBorrado = true },
-                        //onClick = {deleteMascota},
                         modifier = Modifier.weight(0.5f)
                     )
                     {
                         Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Borrar")
                         AdvertenciaBorrado(verAlertaBorrado,{verAlertaBorrado=false},deleteMascota)
                     }
+
                 }
             }
         }

@@ -1,21 +1,15 @@
 package com.example.wallapetapp.pantallas
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,7 +17,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,6 +43,7 @@ import com.example.wallapetapp.vm.MascotasViewModel
 fun WallaMascotas(
     navController: NavHostController,
     navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit,
+    navigateToPantallaMapas: (codPostal: String) -> Unit,
     viewModel: MascotasViewModel = hiltViewModel()
 ) {
     val mascotas by viewModel.mascotas.collectAsState(initial = emptyList())
@@ -67,13 +61,15 @@ fun WallaMascotas(
         },
         content = { padding ->
             ContenidoWallaMascotas(
+
                 padding = padding,
                 mascotas = mascotas,
-                deleteMascota = {
-                    mascota ->
+                navController = navController,
+                deleteMascota = { mascota ->
                     viewModel.deleteMascota(mascota)
-            },
-                navigateToPantallaUpdateMascota = navigateToPantallaUpdateMascota
+                },
+                navigateToPantallaUpdateMascota = navigateToPantallaUpdateMascota,
+                navigateToPantallaMapas = navigateToPantallaMapas
             )
         },
         bottomBar = { BarraNav(navController = navController) }
@@ -85,8 +81,10 @@ fun WallaMascotas(
 fun ContenidoWallaMascotas(
     padding: PaddingValues,
     mascotas: Mascotas,
-    deleteMascota: (mascota:Mascota) -> Unit,
-    navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit
+    navController: NavHostController,
+    deleteMascota: (mascota: Mascota) -> Unit,
+    navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit,
+    navigateToPantallaMapas: (codPostal: String) -> Unit
 ) {
     var filtroCodPostal by remember { mutableStateOf("") }
     val datosFiltrados = mascotas.filter { it.codPostal == filtroCodPostal }
@@ -101,8 +99,10 @@ fun ContenidoWallaMascotas(
             items(if (filtroCodPostal.isEmpty()) mascotas else datosFiltrados) { mascota ->
                MascotaCard(
                    mascota = mascota,
+                   navController= navController,
                    deleteMascota = { deleteMascota(mascota) },
-                   navigateToUpdateMascotaScreen = navigateToPantallaUpdateMascota
+                   navigateToUpdateMascotaScreen = navigateToPantallaUpdateMascota,
+                   navigateToPantallaMapas = navigateToPantallaMapas
                )
             }
         }

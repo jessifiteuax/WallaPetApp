@@ -83,7 +83,7 @@ fun checkDatosOK(poblacion: String, codPostal: String, mail: String): Boolean {
                 titulo = stringResource(R.string.cuidado),
                 mensaje = stringResource(R.string.campos_imprescindibles),
                 textoConfirm = stringResource(R.string.voy_a_ello),
-                onConfirmClick = { verAlerta=false }) { }
+                onConfirmClick = { verAlerta=false }) {}
              }
         }
     }

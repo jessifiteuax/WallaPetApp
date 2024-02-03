@@ -1,7 +1,9 @@
 package com.example.wallapetapp.components
 
 import android.graphics.BitmapFactory
+import android.graphics.Paint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Edit
@@ -21,7 +26,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,9 +44,13 @@ import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MascotaCard(mascota: Mascota,
-                deleteMascota:() -> Unit,
-                navigateToUpdateMascotaScreen: (mascotaId: Int) -> Unit) {
+fun MascotaCard(
+    mascota: Mascota,
+    deleteMascota: () -> Unit,
+    navigateToUpdateMascotaScreen: (mascotaId: Int) -> Unit) {
+
+    var verAlertaBorrado by remember { mutableStateOf(false) }
+
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
@@ -72,15 +84,24 @@ fun MascotaCard(mascota: Mascota,
                 Divider(
                     Modifier
                         .fillMaxWidth()
-                        .padding(10.dp), thickness = 5.dp, color = WallaColTopBar)
+                        .padding(10.dp), thickness = 5.dp, color = WallaColTopBar
+                )
+
                 Row {
-                    IconButton(onClick = {navigateToUpdateMascotaScreen(mascota.id)},
-                        modifier = Modifier.weight(0.5f)) {
+                    IconButton(
+                        onClick = { navigateToUpdateMascotaScreen(mascota.id) },
+                        modifier = Modifier.weight(0.5f)
+                    ) {
                         Icon(imageVector = Icons.Outlined.Edit, contentDescription = "Modificar")
                     }
-                    IconButton(onClick = deleteMascota,
-                        modifier = Modifier.weight(0.5f)) {
+                    IconButton(
+                        onClick = { verAlertaBorrado = true },
+                        //onClick = {deleteMascota},
+                        modifier = Modifier.weight(0.5f)
+                    )
+                    {
                         Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Borrar")
+                        AdvertenciaBorrado(verAlertaBorrado,{verAlertaBorrado=false},deleteMascota)
                     }
                 }
             }

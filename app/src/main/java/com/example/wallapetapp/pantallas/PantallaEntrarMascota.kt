@@ -68,6 +68,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
@@ -85,8 +86,10 @@ import com.example.wallapetapp.domain.model.Mascota
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.MascotasViewModel
+import com.example.wallapetapp.vm.imagePathViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.channels.Channel
 import java.io.File
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -103,6 +106,7 @@ fun WallaEntraMascota(
     navController: NavHostController,
     viewModel: MascotasViewModel = hiltViewModel()
 ) {
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -169,9 +173,10 @@ fun ContenidoWallaEntraMascota(
         fecha = LocalDateTime.now().toString()
         Spacer(modifier = Modifier.padding(5.dp))
         ImagenCamara()
-        foto = ""
-        estaChecked = checkDatosOK(poblacion, codPostal, mail)
 
+        estaChecked = checkDatosOK(poblacion, codPostal, mail)
+        var viewModelFoto = imagePathViewModel()
+        foto= viewModelFoto.imagePath.value.toString()
 
         Button(
             onClick = {
@@ -238,9 +243,12 @@ fun ImagenCamara()
     }
 
     val getImagePath = { imageUri: Uri ->
-        val imagePath = context.createImagePath(imageUri)
-        //recogerImagePath (imagePath)
+        val imagePath = context.createImagePath(imageUri) //path bueno
+        val viewModelImage=imagePathViewModel()
+        viewModelImage.setImagePath(imagePath)
+
     }//tengo el path absoluto de la foto
+
 
 
     Row {

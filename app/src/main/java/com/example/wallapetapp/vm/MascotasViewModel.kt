@@ -52,7 +52,7 @@ class MascotasViewModel @Inject constructor(
             observaciones = observaciones
         )
     }
-    fun updateFecha(fecha:String) {
+    /*fun updateFecha(fecha:String) {
         mascota = mascota.copy(
             fecha = fecha
         )
@@ -61,7 +61,7 @@ class MascotasViewModel @Inject constructor(
         mascota = mascota.copy(
             foto = foto
         )
-    }
+    }*/
     fun updateMascota(mascota:Mascota)=viewModelScope.launch(Dispatchers.IO)
     {
         repo.updateMascota(mascota)

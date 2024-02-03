@@ -49,6 +49,7 @@ import com.example.wallapetapp.vm.MascotasViewModel
 @Composable
 fun WallaMascotas(
     navController: NavHostController,
+    navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit,
     viewModel: MascotasViewModel = hiltViewModel()
 ) {
     val mascotas by viewModel.mascotas.collectAsState(initial = emptyList())
@@ -65,7 +66,15 @@ fun WallaMascotas(
             )
         },
         content = { padding ->
-            ContenidoWallaMascotas(padding, mascotas)
+            ContenidoWallaMascotas(
+                padding = padding,
+                mascotas = mascotas,
+                deleteMascota = {
+                    mascota ->
+                    viewModel.deleteMascota(mascota)
+            },
+                navigateToPantallaUpdateMascota = navigateToPantallaUpdateMascota
+            )
         },
         bottomBar = { BarraNav(navController = navController) }
     )
@@ -73,7 +82,12 @@ fun WallaMascotas(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContenidoWallaMascotas(padding: PaddingValues, mascotas: Mascotas) {
+fun ContenidoWallaMascotas(
+    padding: PaddingValues,
+    mascotas: Mascotas,
+    deleteMascota: (mascota:Mascota) -> Unit,
+    navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit
+) {
     var filtroCodPostal by remember { mutableStateOf("") }
     val datosFiltrados = mascotas.filter { it.codPostal == filtroCodPostal }
 
@@ -85,9 +99,11 @@ fun ContenidoWallaMascotas(padding: PaddingValues, mascotas: Mascotas) {
         CampoTextoFiltro(filtroCodPostal, { filtroCodPostal = it }, stringResource(R.string.Filtrar_codigo_postal))
         LazyColumn{
             items(if (filtroCodPostal.isEmpty()) mascotas else datosFiltrados) { mascota ->
-                MascotaCard(
-                    mascota = mascota
-                )
+               MascotaCard(
+                   mascota = mascota,
+                   deleteMascota = { deleteMascota(mascota) },
+                   navigateToUpdateMascotaScreen = navigateToPantallaUpdateMascota
+               )
             }
         }
     }

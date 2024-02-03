@@ -30,3 +30,4 @@ fun iconoBarra(navController: NavHostController) {
 fun textoBarraBottom(texto: String){
     Text(text = texto, fontSize = 12.sp, color = Color.White, fontFamily = LemonFamily)
 }
+

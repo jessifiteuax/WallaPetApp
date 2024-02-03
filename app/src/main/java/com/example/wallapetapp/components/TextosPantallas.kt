@@ -60,3 +60,11 @@ fun TextoCardDatos(texto:String){
         fontFamily = CaveatFamily
     )
 }
+@Composable
+fun TextoUpdateMascota() {
+    Text(
+        text = stringResource(R.string.modifica_los_datos_necesarios),
+        fontSize = 24.sp,
+        fontFamily = CaveatFamily
+    )
+}

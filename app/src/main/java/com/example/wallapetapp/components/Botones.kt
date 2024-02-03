@@ -61,29 +61,6 @@ fun BotonEntrarMascotas(navController: NavHostController) {
     }
 }
 
-/*@Composable
-fun BotonPublicar(estaChecked: Boolean) {
-    Button(
-        onClick = { /*TODO*/ },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFFC03D69),
-            contentColor = Color.White
-        ),
-        modifier = Modifier.padding(10.dp),
-        enabled = estaChecked
-    ) {
-        Icon(imageVector = Icons.Filled.ThumbUpOffAlt, tint = Color.White, contentDescription = "")
-        Spacer(modifier = Modifier.width(5.dp))
-        Text(
-            text = stringResource(R.string.publicar),
-            fontSize = 16.sp
-        )
-
-    }
-}*/
-
-
-
 
 
 

@@ -27,4 +27,7 @@
     <string name="codigo_postalcard">Postcode</string>
     <string name="emailcard">Contact email address</string>
     <string name="Filtrar_codigo_postal">Filter by postcode</string>
+    <string name="actualizar">Update</string>
+    <string name="actualiza_datos">Refresh the data</string>
+    <string name="modifica_los_datos_necesarios">Update the necessary data</string>
 </resources>

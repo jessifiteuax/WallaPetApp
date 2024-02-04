@@ -11,7 +11,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.pantallas.Maps
-import com.example.wallapetapp.pantallas.WallaRecomendaciones
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint

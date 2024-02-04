@@ -61,7 +61,26 @@ fun BotonEntrarMascotas(navController: NavHostController) {
     }
 }
 
+@Composable
+fun BotonVerConsejos(navController: NavHostController) {
+    Button(
+        onClick = { navController.navigate("Consejos") },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFFC03D69),
+            contentColor = Color.White,
+        )
+    ) {
+        Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
+        Spacer(modifier = Modifier.width(5.dp))
+        Text(
+            text = "Quiero ver consejos",
+            fontSize = 16.sp
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
 
+    }
+}
 
 
 

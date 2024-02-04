@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.components.BotonEntrarMascotas
+import com.example.wallapetapp.components.BotonVerConsejos
 import com.example.wallapetapp.components.BotonVerMascotas
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoHome
@@ -57,6 +58,8 @@ fun ContenidoWallaHome(navController: NavHostController) {
         BotonVerMascotas(navController)
         Spacer(modifier = Modifier.padding(16.dp))
         BotonEntrarMascotas(navController)
+        Spacer(modifier = Modifier.padding(16.dp))
+        BotonVerConsejos(navController)
     }
     Box(
         Modifier.fillMaxSize(),

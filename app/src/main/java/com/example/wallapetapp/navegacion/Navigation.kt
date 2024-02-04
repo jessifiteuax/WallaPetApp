@@ -11,10 +11,10 @@ import androidx.navigation.navArgument
 import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.pantallas.PantallaUpdateMascota
 import com.example.wallapetapp.pantallas.WallaAcercaDe
+import com.example.wallapetapp.pantallas.WallaConsejos
 import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.pantallas.WallaHome
 import com.example.wallapetapp.pantallas.WallaMascotas
-import com.example.wallapetapp.pantallas.WallaRecomendaciones
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -75,8 +75,8 @@ fun navigation() {
                 codPostal = codPostal
             )
         }
-        composable("Recomendaciones") {
-            WallaRecomendaciones(navController)
+        composable("Consejos") {
+            WallaConsejos(navController)
         }
     }
 }

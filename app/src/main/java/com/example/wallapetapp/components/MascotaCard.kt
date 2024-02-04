@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
@@ -35,6 +36,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -133,17 +136,26 @@ fun PhotoView(imagePath: String) {
         }
     }
     if (bitmap != null) {
-
         Image(
             bitmap = bitmap.asImageBitmap(),
             contentDescription = "",
             modifier = Modifier
                 .padding(15.dp)
+                .size(150.dp),
+            contentScale = ContentScale.Crop
         )
     } else {
-        Text(text = "Error al cargar la imagen")
+        //Text(text = "Error al cargar la imagen")
+        Image(
+            modifier = Modifier
+                .padding(15.dp)
+                .size(150.dp),
+            painter = painterResource(id = R.drawable.fotodefecto),
+            contentDescription = null,
+            contentScale = ContentScale.Crop
+        )
     }
 }
-//BitmapFactory.decodeResource(getResources(), R.id.arrow)
+
 
 

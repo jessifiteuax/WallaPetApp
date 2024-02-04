@@ -115,9 +115,8 @@ fun MascotaCard(
                     )
                     {
                         Icon(imageVector = Icons.Outlined.Delete, contentDescription = "Borrar")
-                        AdvertenciaBorrado(verAlertaBorrado,{verAlertaBorrado=false},deleteMascota)
+                       AdvertenciaBorrado(verAlertaBorrado,{verAlertaBorrado=false},deleteMascota)
                     }
-
                 }
             }
         }
@@ -145,7 +144,6 @@ fun PhotoView(imagePath: String) {
             contentScale = ContentScale.Crop
         )
     } else {
-        //Text(text = "Error al cargar la imagen")
         Image(
             modifier = Modifier
                 .padding(15.dp)

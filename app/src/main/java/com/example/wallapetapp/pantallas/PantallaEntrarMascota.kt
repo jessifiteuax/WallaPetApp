@@ -177,10 +177,8 @@ fun ContenidoWallaEntraMascota(
         fecha = LocalDateTime.now().toString()
         Spacer(modifier = Modifier.padding(5.dp))
         ImagenCamara()
-
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
         foto=imagePath.imagePath.value.toString()
-
 
         Button(
             onClick = {
@@ -247,13 +245,9 @@ fun ImagenCamara(viewModelImage: imagePathViewModel = hiltViewModel())
     }
 
     val getImagePath = { imageUri: Uri ->
-        val imagePath = context.createImagePath(imageUri) //path bueno
-
+        val imagePath = context.createImagePath(imageUri)
         viewModelImage.setImagePath(imagePath)
-
-    }//tengo el path absoluto de la foto
-
-
+    }
 
     Row {
         Button(
@@ -328,17 +322,8 @@ fun Context.createImagePath(imageUri: Uri): String {
             input.copyTo(output)
         }
     }
-
     return outputFile.absolutePath
-
 }
-
-/* fun recogerImagePath(imagePath : String){
-
- }*/
-
-
-
 
 
 

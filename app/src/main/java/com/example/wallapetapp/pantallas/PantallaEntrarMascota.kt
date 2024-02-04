@@ -85,8 +85,8 @@ import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
+import com.example.wallapetapp.vm.ImagePathViewModel
 import com.example.wallapetapp.vm.MascotasViewModel
-import com.example.wallapetapp.vm.imagePathViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.channels.Channel
@@ -105,7 +105,7 @@ import java.util.Objects
 fun WallaEntraMascota(
     navController: NavHostController,
     viewModel: MascotasViewModel = hiltViewModel(),
-    viewModelImage: imagePathViewModel = hiltViewModel()
+    viewModelImage: ImagePathViewModel = hiltViewModel()
 ) {
 
     Scaffold(
@@ -144,7 +144,7 @@ fun ContenidoWallaEntraMascota(
     padding: PaddingValues,
     navController: NavHostController,
     addMascota: (mascota: Mascota) -> Unit,
-    imagePath: imagePathViewModel
+    imagePath: ImagePathViewModel
 ) {
     Column(
         modifier = Modifier
@@ -215,7 +215,7 @@ fun ContenidoWallaEntraMascota(
 }
 
 @Composable
-fun ImagenCamara(viewModelImage: imagePathViewModel = hiltViewModel())
+fun ImagenCamara(viewModelImage: ImagePathViewModel = hiltViewModel())
 {
     val context = LocalContext.current
     val file = context.createImageFile()

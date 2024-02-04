@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class imagePathViewModel:ViewModel() {
+class ImagePathViewModel:ViewModel() {
     private val _imagePath = MutableLiveData<String>()
     val imagePath: LiveData<String>
         get() = _imagePath

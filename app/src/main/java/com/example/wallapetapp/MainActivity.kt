@@ -12,10 +12,12 @@ import androidx.compose.ui.Modifier
 import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

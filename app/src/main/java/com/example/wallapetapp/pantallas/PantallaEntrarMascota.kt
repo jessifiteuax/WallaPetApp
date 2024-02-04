@@ -104,7 +104,8 @@ import java.util.Objects
 @Composable
 fun WallaEntraMascota(
     navController: NavHostController,
-    viewModel: MascotasViewModel = hiltViewModel()
+    viewModel: MascotasViewModel = hiltViewModel(),
+    viewModelImage: imagePathViewModel = hiltViewModel()
 ) {
 
     Scaffold(
@@ -127,7 +128,9 @@ fun WallaEntraMascota(
                 ContenidoWallaEntraMascota(
                     padding = padding,
                     navController,
-                    addMascota = { mascota -> viewModel.addMascota(mascota) })
+                    addMascota = { mascota -> viewModel.addMascota(mascota) },
+                    imagePath = viewModelImage
+                    )
             }
         },
         bottomBar = { BarraNav(navController) }
@@ -140,7 +143,8 @@ fun WallaEntraMascota(
 fun ContenidoWallaEntraMascota(
     padding: PaddingValues,
     navController: NavHostController,
-    addMascota: (mascota: Mascota) -> Unit
+    addMascota: (mascota: Mascota) -> Unit,
+    imagePath: imagePathViewModel
 ) {
     Column(
         modifier = Modifier
@@ -175,8 +179,8 @@ fun ContenidoWallaEntraMascota(
         ImagenCamara()
 
         estaChecked = checkDatosOK(poblacion, codPostal, mail)
-        var viewModelFoto = imagePathViewModel()
-        foto= viewModelFoto.imagePath.value.toString()
+        foto=imagePath.imagePath.value.toString()
+
 
         Button(
             onClick = {
@@ -213,7 +217,7 @@ fun ContenidoWallaEntraMascota(
 }
 
 @Composable
-fun ImagenCamara()
+fun ImagenCamara(viewModelImage: imagePathViewModel = hiltViewModel())
 {
     val context = LocalContext.current
     val file = context.createImageFile()
@@ -244,7 +248,7 @@ fun ImagenCamara()
 
     val getImagePath = { imageUri: Uri ->
         val imagePath = context.createImagePath(imageUri) //path bueno
-        val viewModelImage=imagePathViewModel()
+
         viewModelImage.setImagePath(imagePath)
 
     }//tengo el path absoluto de la foto

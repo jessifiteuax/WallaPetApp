@@ -71,9 +71,7 @@ fun MascotaCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                //PhotoView(imagePath = mascota.foto)
-                //Text(text = mascota.foto)
-
+                PhotoView(imagePath = mascota.foto)
                 TextoCardTitulos(texto = stringResource(R.string.nombre))
                 TextoCardDatos(texto = mascota.nombre)
                 TextoCardTitulos(texto = stringResource(R.string.poblacioncard))
@@ -125,8 +123,6 @@ fun MascotaCard(
 
 @Composable
 fun PhotoView(imagePath: String) {
-    Text(text = "Entro en PhotoView")
-    Text(text = imagePath)
     val bitmap = remember {
         try {
             val file = File(imagePath)

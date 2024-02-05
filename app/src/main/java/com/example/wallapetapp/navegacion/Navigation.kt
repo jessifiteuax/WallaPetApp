@@ -12,6 +12,7 @@ import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.pantallas.PantallaUpdateMascota
 import com.example.wallapetapp.pantallas.WallaAcercaDe
 import com.example.wallapetapp.pantallas.WallaConsejos
+import com.example.wallapetapp.pantallas.WallaContactos
 import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.pantallas.WallaHome
 import com.example.wallapetapp.pantallas.WallaMascotas
@@ -77,6 +78,9 @@ fun navigation() {
         }
         composable("Consejos") {
             WallaConsejos(navController)
+        }
+        composable("Contactos") {
+            WallaContactos(navController)
         }
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,16 +19,18 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.components.CampoTextoFiltro
 import com.example.wallapetapp.components.ConsejoCard
+import com.example.wallapetapp.components.ContactoCard
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.model.Contacto
 import com.example.wallapetapp.model.getConsejos
+import com.example.wallapetapp.model.getContactos
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallaConsejos(navController: NavHostController) {
+fun WallaContactos(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -43,7 +44,7 @@ fun WallaConsejos(navController: NavHostController) {
             )
         },
         content = { padding ->
-            ContenidoWallaConsejos(padding)
+            ContenidoWallaContactos(padding)
         },
         bottomBar = { BarraNav(navController) }
     )
@@ -51,10 +52,10 @@ fun WallaConsejos(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContenidoWallaConsejos(padding: PaddingValues) {
+fun ContenidoWallaContactos(padding: PaddingValues) {
     var filtroTexto by remember { mutableStateOf("") }
-    val consejosFiltrados = getConsejos().filter {consejo ->
-        consejo.titulo.contains(filtroTexto, ignoreCase = true) || consejo.descripcion.contains(filtroTexto, ignoreCase = true)
+    val consejosFiltrados = getContactos().filter { contacto ->
+        contacto.lugar.contains(filtroTexto, ignoreCase = true) || contacto.descripcion.contains(filtroTexto, ignoreCase = true)
     }
 
     Column(
@@ -62,13 +63,11 @@ fun ContenidoWallaConsejos(padding: PaddingValues) {
             .fillMaxSize()
             .padding(padding)
     ) {
-        CampoTextoFiltro(filtroTexto, { filtroTexto = it }, "Consejo a buscar")
-               LazyColumn() {
-            items(consejosFiltrados) { consejo ->
-                ConsejoCard(consejo)
+        CampoTextoFiltro(filtroTexto, { filtroTexto = it }, "Contacto a buscar")
+        LazyColumn() {
+            items(consejosFiltrados) { contacto ->
+                ContactoCard(contacto)
             }
         }
     }
 }
-
-

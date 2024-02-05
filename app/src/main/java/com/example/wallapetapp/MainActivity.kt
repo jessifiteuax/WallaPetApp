@@ -10,9 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.wallapetapp.navegacion.navigation
-import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 import com.google.android.gms.location.LocationServices
+import coordenadas
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +27,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    navigation()
+                    //navigation()
+                    coordenadas()
 
                 }
             }

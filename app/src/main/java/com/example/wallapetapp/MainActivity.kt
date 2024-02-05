@@ -28,8 +28,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navigation()
-                    //Maps()
-                    //coord()
+
                 }
             }
         }

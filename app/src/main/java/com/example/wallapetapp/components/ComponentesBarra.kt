@@ -2,6 +2,8 @@ package com.example.wallapetapp.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Textsms
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -25,6 +27,16 @@ fun iconoBarra(navController: NavHostController) {
             tint = Color.White)
     }
 }
+
+/*@Composable
+fun iconoBarraDerecha(navController: NavHostController) {
+    IconButton(onClick = { navController.navigate("Recomendaciones")})
+    {
+        Icon(imageVector = Icons.Outlined.Info,
+            contentDescription = null,
+            tint = Color.White)
+    }
+}*/
 
 @Composable
 fun textoBarraBottom(texto: String){

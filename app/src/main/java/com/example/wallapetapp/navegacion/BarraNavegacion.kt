@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Textsms
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -42,6 +43,7 @@ fun BarraNav(navController: NavHostController) {
                 }
             }
         )
+
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("AcercaDe") },
@@ -50,7 +52,7 @@ fun BarraNav(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     Icon(
-                        imageVector = Icons.Default.Textsms,
+                        imageVector = Icons.Outlined.Info,
                         contentDescription = "AcercaDe",
                         tint = Color.White
                     )
@@ -58,5 +60,22 @@ fun BarraNav(navController: NavHostController) {
                 }
             }
         )
+
+       /* NavigationBarItem(
+         selected = false,
+         onClick = { navController.navigate("Recomendaciones") },
+         icon = {
+             Column(
+                 horizontalAlignment = Alignment.CenterHorizontally
+             ) {
+                 Icon(
+                     imageVector = Icons.Default.Home,
+                     contentDescription = "Consejos",
+                     tint = Color.White
+                 )
+                 textoBarraBottom("Consejos")
+             }
+         }
+     )*/
     }
 }

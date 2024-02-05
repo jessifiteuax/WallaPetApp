@@ -32,7 +32,7 @@ fun ContactoCard(contacto: Contacto) {
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
-            .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
+            .padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
     ) {
@@ -53,24 +53,25 @@ fun ContactoCard(contacto: Contacto) {
                     Modifier
                         .clickable {
                             val intent = Intent(Intent.ACTION_DIAL)
-                            intent.data = Uri.parse(contacto.telefono)
+                            intent.data = Uri.parse("tel:${contacto.telefono}")
                             context.startActivity(intent)
                         },
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
-                Icon(imageVector = Icons.Outlined.Mail, contentDescription = "mail")
-                Text(
-                    text = "Enviar email",
-                    Modifier
-                        .clickable {
-                            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                                data= Uri.parse(contacto.mail)
-                            }
-                            context.startActivity(intent)
-                        },
-                )
+                if(contacto.mail!=""){
+                    Icon(imageVector = Icons.Outlined.Mail, contentDescription = "mail")
+                    Text(
+                        text = "Enviar email",
+                        Modifier
+                            .clickable {
+                                val intent = Intent(Intent.ACTION_SENDTO)
+                                intent.data= Uri.parse("mailto:${contacto.mail}")
+                                context.startActivity(intent)
+                            },
+                    )
+                }
             }
-            Spacer(modifier = Modifier.padding(5.dp))
+            Spacer(modifier = Modifier.padding(15.dp))
         }
     }
 }

@@ -30,11 +30,12 @@ fun ConsejoCard(consejo: Consejo) {
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
-            .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
+            .padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 15.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
     ) {
         Column {
+            Spacer(modifier = Modifier.padding(5.dp))
             TextoCardTitulos(texto = consejo.titulo)
             TextoCardDatos(texto = consejo.descripcion)
             Spacer(modifier = Modifier.padding(5.dp))
@@ -54,7 +55,7 @@ fun ConsejoCard(consejo: Consejo) {
                     context.startActivity(intent)
                 },)
             }
-            Spacer(modifier = Modifier.padding(5.dp))
+            Spacer(modifier = Modifier.padding(15.dp))
         }
     }
 }

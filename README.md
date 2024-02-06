@@ -31,7 +31,7 @@ En todo momento de la aplicación, tendremos presente una barra inferior donde p
 ### Quiero ver mascotas perdidas
 
 En esta sección veremos un listado de todas las mascotas entradas hasta el momento con sus datos: nombre, código postal y población donde se encuentra, correo electrónico de contacto de la persona que lo ha entrado y observaciones si las tuviera. También mostrará una foto del animal para facilitar su reconocimiento.  
-En la parte superior podremos filtrar por código postal estos resultados puediendo ver así una criba del lugar donde nos interesa buscar.
+En la parte superior podremos filtrar por código postal estos resultados puediendo ver así una criba del lugar donde nos interesa buscar. Si tenemos nueva información sobre la mascota, tendremos la opción de poder modificar o eliminarla.
 
 
 ### Quiero entrar una nueva mascota

@@ -28,7 +28,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun Maps(
     navHostController: NavHostController,
     codPostal: String,
-    viewModelLoc: LocationViewModel = hiltViewModel()
+    //viewModelLoc: LocationViewModel = hiltViewModel()
 ) {
     Scaffold(
         topBar = {
@@ -43,13 +43,13 @@ fun Maps(
             )
         },
         content = { padding ->
-            ContenidoMaps(padding, codPostal, viewModelLoc)
+            ContenidoMaps(padding, codPostal/*, viewModelLoc*/)
         }
     )
 }
 
 @Composable
-fun ContenidoMaps(padding: PaddingValues, codPostal: String, viewModelLoc: LocationViewModel) {
+fun ContenidoMaps(padding: PaddingValues, codPostal: String/*, viewModelLoc: LocationViewModel*/) {
 
     val (latitude, longitude) = coordinadasDeCodPostal(codPostal)
     val lugar = LatLng(latitude, longitude)

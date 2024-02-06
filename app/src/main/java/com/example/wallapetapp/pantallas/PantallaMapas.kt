@@ -30,7 +30,6 @@ fun Maps(
     codPostal: String,
     viewModelLoc: LocationViewModel = hiltViewModel()
 ) {
-    //val codPostal="43700"
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -86,46 +85,6 @@ fun coordinadasDeCodPostal(codPostal: String): Pair<Double, Double> {
     val (latitudeDouble, longitudeDouble) = latLngDouble(latitud, longitud)
     return latitudeDouble to longitudeDouble
 }
-
-
-/*@OptIn(ExperimentalCoroutinesApi::class)
-@SuppressLint("MissingPermission")
-suspend fun miLocalizacion(context: Context): Location? {
-
-    val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-    //hacer tema pedir permisos
-    val isUserLocationPermissionsGranted = true //quitar cuando tengamos tema permisos
-    val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    val isGPSEnabled =
-        locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.GPS_PROVIDER
-        )
-    if (!isGPSEnabled || !isUserLocationPermissionsGranted){
-        return null
-    }
-
-    return suspendCancellableCoroutine { cont ->
-        fusedLocationProviderClient.lastLocation.apply {
-            if(isComplete){
-                if(isSuccessful){
-                    cont.resume(result){}
-                }else{
-                    cont.resume(null){}
-                }
-                return@suspendCancellableCoroutine
-            }
-            addOnSuccessListener {
-                cont.resume(it){}
-            }
-            addOnFailureListener {
-                cont.resume(null){}
-            }
-            addOnCanceledListener {
-                cont.resume(null){}
-            }
-        }
-    }
-}*/
 
 fun latLngDouble(latitud: Double?, longitud: Double?): Pair<Double, Double> {
     val latitudeDouble: Double

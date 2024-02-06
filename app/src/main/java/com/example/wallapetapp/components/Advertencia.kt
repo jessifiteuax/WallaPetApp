@@ -6,6 +6,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.wallapetapp.R
 import com.example.wallapetapp.domain.model.Mascota
 
 @Composable
@@ -51,7 +53,7 @@ fun AdvertenciaBorrado(
                     ),
                     onClick = { onConfirmClick() }
                 ) {
-                    Text(text = "Eliminar")
+                    Text(text = stringResource(R.string.eliminar))
                 }
             },
             dismissButton = {
@@ -62,11 +64,11 @@ fun AdvertenciaBorrado(
                     ),
                     onClick = { onDismissClick() }
                 ) {
-                    Text(text = "Descartar")
+                    Text(text = stringResource(R.string.descartar))
                 }
             },
-            title = { Text(text = "Eliminar") },
-            text = { Text(text = "Seguro que quieres borrar?") },
+            title = { Text(text = stringResource(R.string.eliminar)) },
+            text = { Text(text = stringResource(R.string.seguro_que_quieres_borrar)) },
         )
     }
 

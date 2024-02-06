@@ -22,7 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.wallapetapp.R
 import com.example.wallapetapp.model.Contacto
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
@@ -49,7 +51,7 @@ fun ContactoCard(contacto: Contacto) {
 
                 Icon(imageVector = Icons.Outlined.Phone, contentDescription = "Telf")
                 Text(
-                    text = "Llamar",
+                    text = stringResource(R.string.llamar),
                     Modifier
                         .clickable {
                             val intent = Intent(Intent.ACTION_DIAL)
@@ -61,7 +63,7 @@ fun ContactoCard(contacto: Contacto) {
                 if(contacto.mail!=""){
                     Icon(imageVector = Icons.Outlined.Mail, contentDescription = "mail")
                     Text(
-                        text = "Enviar email",
+                        text = stringResource(R.string.enviar_email),
                         Modifier
                             .clickable {
                                 val intent = Intent(Intent.ACTION_SENDTO)

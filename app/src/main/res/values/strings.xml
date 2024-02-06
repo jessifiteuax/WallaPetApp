@@ -30,4 +30,16 @@
     <string name="actualizar">Actualizar</string>
     <string name="actualiza_datos">Actualiza los datos</string>
     <string name="modifica_los_datos_necesarios">Modifica los datos necesarios</string>
+    <string name="dise_ado_por_wallapet_company_para_mantener_la_comunidad_animal_unida">Diseñado por WallaPet Company para mantener la comunidad animal unida\n</string>
+    <string name="puedes_hacer_cualquier_sugerencia_mandando_un_correo_a_opina_wallapet_com">" Puedes hacer cualquier sugerencia mandando un correo a opina@wallapet.com"</string>
+    <string name="wallapetapp_versi_n_1_0_0">"WallapetApp Versión 1.0.0 "</string>
+    <string name="aplicaci_n_dise_ada_para_sistemas_android">Aplicación diseñada para sistemas Android</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="descartar">Descartar</string>
+    <string name="seguro_que_quieres_borrar">Seguro que quieres borrar?</string>
+    <string name="contactos_de_inter_s">Contactos de interés</string>
+    <string name="quiero_ver_consejos">Quiero ver consejos</string>
+    <string name="llamar">Llamar</string>
+    <string name="enviar_email">Enviar email</string>
+    <string name="contacto_a_buscar">Contacto a buscar</string>
 </resources>

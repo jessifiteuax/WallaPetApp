@@ -73,7 +73,7 @@ fun BotonVerConsejos(navController: NavHostController) {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Quiero ver consejos",
+            text = stringResource(R.string.quiero_ver_consejos),
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))
@@ -94,7 +94,7 @@ fun BotonVerContactos(navController: NavHostController) {
         Icon(imageVector = Icons.Filled.Pets, tint = Color.White, contentDescription = "")
         Spacer(modifier = Modifier.width(5.dp))
         Text(
-            text = "Contactos de interés",
+            text = stringResource(R.string.contactos_de_inter_s),
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.width(5.dp))

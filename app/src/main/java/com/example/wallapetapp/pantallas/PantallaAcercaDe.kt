@@ -1,9 +1,12 @@
 package com.example.wallapetapp.pantallas
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,8 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
 import com.example.wallapetapp.components.CampoTexto
+import com.example.wallapetapp.components.ImagenLogoAcercaDe
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.components.TextoAcercaDe
+import com.example.wallapetapp.components.TextoAcercaDe2
+import com.example.wallapetapp.components.TextoAcercaDeNombre
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.ui.theme.WallaColTopBar
@@ -66,7 +72,20 @@ fun ContenidoWallaAcercaDe(padding: PaddingValues) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextoAcercaDe()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            ImagenLogoAcercaDe()
+            Spacer(modifier = Modifier.padding(5.dp))
+            Column {
+                TextoAcercaDeNombre()
+                Spacer(modifier = Modifier.padding(5.dp))
+                TextoAcercaDe()
+            }
+        }
+        TextoAcercaDe2()
+
     }
 }
 

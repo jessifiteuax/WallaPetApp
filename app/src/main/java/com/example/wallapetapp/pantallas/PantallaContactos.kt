@@ -16,7 +16,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
 import com.example.wallapetapp.components.CampoTextoFiltro
 import com.example.wallapetapp.components.ConsejoCard
 import com.example.wallapetapp.components.ContactoCard
@@ -63,7 +65,8 @@ fun ContenidoWallaContactos(padding: PaddingValues) {
             .fillMaxSize()
             .padding(padding)
     ) {
-        CampoTextoFiltro(filtroTexto, { filtroTexto = it }, "Contacto a buscar")
+        CampoTextoFiltro(filtroTexto, { filtroTexto = it },
+            stringResource(R.string.contacto_a_buscar))
         LazyColumn() {
             items(consejosFiltrados) { contacto ->
                 ContactoCard(contacto)

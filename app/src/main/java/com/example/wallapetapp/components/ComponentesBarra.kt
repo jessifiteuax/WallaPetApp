@@ -28,15 +28,6 @@ fun iconoBarra(navController: NavHostController) {
     }
 }
 
-/*@Composable
-fun iconoBarraDerecha(navController: NavHostController) {
-    IconButton(onClick = { navController.navigate("Recomendaciones")})
-    {
-        Icon(imageVector = Icons.Outlined.Info,
-            contentDescription = null,
-            tint = Color.White)
-    }
-}*/
 
 @Composable
 fun textoBarraBottom(texto: String){

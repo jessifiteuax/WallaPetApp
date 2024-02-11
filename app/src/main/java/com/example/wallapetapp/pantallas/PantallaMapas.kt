@@ -8,10 +8,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.ui.theme.WallaColTopBar
@@ -28,6 +30,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun Maps(
     navHostController: NavHostController,
     codPostal: String,
+    darkmode: MutableState<Boolean>
     //viewModelLoc: LocationViewModel = hiltViewModel()
 ) {
     Scaffold(
@@ -37,6 +40,9 @@ fun Maps(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
+                actions = {
+                    BotonDarkMode(darkMode = darkmode)
+                },
                 navigationIcon = {
                     iconoBarra(navHostController)
                 }

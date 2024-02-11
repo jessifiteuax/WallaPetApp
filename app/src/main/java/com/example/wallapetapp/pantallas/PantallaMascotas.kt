@@ -12,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoFiltro
 import com.example.wallapetapp.components.MascotaCard
@@ -44,7 +46,8 @@ fun WallaMascotas(
     navController: NavHostController,
     navigateToPantallaUpdateMascota: (mascotaId: Int) -> Unit,
     navigateToPantallaMapas: (codPostal: String) -> Unit,
-    viewModel: MascotasViewModel = hiltViewModel()
+    viewModel: MascotasViewModel = hiltViewModel(),
+    darkmode: MutableState<Boolean>
 ) {
     val mascotas by viewModel.mascotas.collectAsState(initial = emptyList())
     Scaffold(
@@ -54,6 +57,9 @@ fun WallaMascotas(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar,
                 ),
+                actions = {
+                    BotonDarkMode(darkMode = darkmode)
+                },
                 navigationIcon = {
                     iconoBarra(navController)
                 }

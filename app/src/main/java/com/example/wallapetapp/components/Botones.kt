@@ -9,8 +9,15 @@ import androidx.compose.material.icons.filled.ThumbUpOffAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -103,7 +110,24 @@ fun BotonVerContactos(navController: NavHostController) {
     }
 }
 
+@Composable
+fun BotonDarkMode(darkMode: MutableState<Boolean>){
+   /* Button(onClick = {darkMode.value = !darkMode.value}) {
+        Text(text = "DarkMode", fontSize = 10.sp)
+    }*/
+    TextButton(onClick = {
+        darkMode.value = !darkMode.value
+    }, colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Transparent)
+    ) {
+        Text(text = "Dark\nMode")
+    }
+/*    var switched by remember { mutableStateOf(false) }
 
+    Switch(checked = darkMode.value,
+        onCheckedChange = {darkMode.value = !darkMode.value}
+    )*/
+
+}
 
 
 

@@ -3,6 +3,7 @@ package com.example.wallapetapp.navegacion
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,17 +20,17 @@ import com.example.wallapetapp.pantallas.WallaMascotas
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun navigation() {
+fun navigation(darkmode: MutableState<Boolean>) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home") {
         composable("Home") {
-            WallaHome(navController)
+            WallaHome(navController, darkmode)
         }
         composable("EntrarMascotas") {
-            WallaEntraMascota(navController)
+            WallaEntraMascota(navController, darkmode=darkmode)
         }
         composable("AcercaDe") {
-            WallaAcercaDe(navController)
+            WallaAcercaDe(navController, darkmode)
         }
         composable("Mascotas") {
             WallaMascotas(navController,
@@ -43,6 +44,7 @@ fun navigation() {
                         "Mapas/$codPostal"
                     )
                 },
+                darkmode=darkmode
             )
         }
         composable(
@@ -60,6 +62,7 @@ fun navigation() {
                 navigateBack = {
                     navController.popBackStack()
                 },
+                darkmode=darkmode
                 )
         }
         composable(
@@ -73,14 +76,15 @@ fun navigation() {
             val codPostal = backStackEntry.arguments?.getString("codPostal") ?: ""
             Maps(
                 navController,
-                codPostal = codPostal
+                codPostal = codPostal,
+                darkmode=darkmode
             )
         }
         composable("Consejos") {
-            WallaConsejos(navController)
+            WallaConsejos(navController,darkmode=darkmode)
         }
         composable("Contactos") {
-            WallaContactos(navController)
+            WallaContactos(navController,darkmode=darkmode)
         }
     }
 }

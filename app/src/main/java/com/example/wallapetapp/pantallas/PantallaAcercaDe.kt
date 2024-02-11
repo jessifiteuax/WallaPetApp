@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.ImagenLogoAcercaDe
 import com.example.wallapetapp.navegacion.BarraNav
@@ -42,7 +44,9 @@ import com.example.wallapetapp.ui.theme.WallaColTopBar
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallaAcercaDe(navController: NavHostController) {
+fun WallaAcercaDe(navController: NavHostController, darkmode: MutableState<Boolean>) {
+
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -50,6 +54,9 @@ fun WallaAcercaDe(navController: NavHostController) {
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
+                actions = {
+                    BotonDarkMode(darkMode = darkmode)
+                },
                 navigationIcon = {
                     iconoBarra(navController)
                 }
@@ -59,6 +66,7 @@ fun WallaAcercaDe(navController: NavHostController) {
             padding ->
             ContenidoWallaAcercaDe(padding)
         },
+
         bottomBar = { BarraNav(navController) }
     )
 }

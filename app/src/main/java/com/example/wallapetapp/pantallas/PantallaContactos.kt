@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTextoFiltro
 import com.example.wallapetapp.components.ConsejoCard
 import com.example.wallapetapp.components.ContactoCard
@@ -32,7 +34,7 @@ import com.example.wallapetapp.ui.theme.WallaColTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WallaContactos(navController: NavHostController) {
+fun WallaContactos(navController: NavHostController, darkmode: MutableState<Boolean>) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -40,6 +42,9 @@ fun WallaContactos(navController: NavHostController) {
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
+                actions = {
+                    BotonDarkMode(darkMode = darkmode)
+                },
                 navigationIcon = {
                     iconoBarra(navController)
                 }

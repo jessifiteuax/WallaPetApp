@@ -8,6 +8,8 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
@@ -20,12 +22,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WallaPetAppTheme {
+            val darkmode = remember { mutableStateOf(false) }
+            WallaPetAppTheme(
+                darkTheme = darkmode.value
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    navigation()
+                    navigation(darkmode)
 
                 }
             }

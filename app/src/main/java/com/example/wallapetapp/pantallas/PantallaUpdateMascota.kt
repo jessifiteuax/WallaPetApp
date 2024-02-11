@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTexto
 import com.example.wallapetapp.components.CampoTextoMail
 import com.example.wallapetapp.components.CampoTextoNum
@@ -49,7 +51,8 @@ fun PantallaUpdateMascota(
     navHostController: NavHostController,
     viewModel: MascotasViewModel = hiltViewModel(),
     mascotaId: Int,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    darkmode: MutableState<Boolean>
 ) {
     LaunchedEffect(Unit) {
         viewModel.getMascota(mascotaId)
@@ -62,6 +65,9 @@ fun PantallaUpdateMascota(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
+                actions = {
+                    BotonDarkMode(darkMode = darkmode)
+                },
                 navigationIcon = {
                     iconoBarra(navHostController)
                 }

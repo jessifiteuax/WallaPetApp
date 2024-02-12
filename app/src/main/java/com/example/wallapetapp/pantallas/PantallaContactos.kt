@@ -38,7 +38,7 @@ fun WallaContactos(navController: NavHostController, darkmode: MutableState<Bool
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { textoBarra(texto = "Consejos") },
+                title = { textoBarra(texto = stringResource(R.string.contactos)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),

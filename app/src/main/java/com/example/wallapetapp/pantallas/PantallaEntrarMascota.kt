@@ -69,11 +69,11 @@ import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
 import com.example.wallapetapp.navegacion.BarraNav
 import com.example.wallapetapp.notificaciones.Notificacion
-import com.example.wallapetapp.notificaciones.crearCanalNotificacion
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.ImagePathViewModel
 import com.example.wallapetapp.vm.MascotasViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import java.io.File
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -134,11 +134,6 @@ fun ContenidoWallaEntraMascota(
     addMascota: (mascota: Mascota) -> Unit,
     imagePath: ImagePathViewModel
 ) {
-    val idCanal = "CanalWallapet"
-    val context = LocalContext.current
-    LaunchedEffect(Unit){
-        crearCanalNotificacion(idCanal, context)
-    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -155,6 +150,7 @@ fun ContenidoWallaEntraMascota(
         var fecha by remember { mutableStateOf("") }
         var foto: String
         val estaChecked: Boolean
+        val context = LocalContext.current
 
         TextoEntrarMascota()
         Spacer(modifier = Modifier.padding(5.dp))
@@ -178,7 +174,8 @@ fun ContenidoWallaEntraMascota(
                 val mascota =
                     Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha, foto)
                 addMascota(mascota)
-                Notificacion(idCanal,context)
+                val notif = Notificacion(context)
+                notif.lanzaNotificacion()
                 navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(

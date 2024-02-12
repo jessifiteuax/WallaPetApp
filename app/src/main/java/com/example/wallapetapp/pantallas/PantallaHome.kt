@@ -2,6 +2,7 @@
 
 package com.example.wallapetapp.pantallas
 
+import android.Manifest
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.components.BotonDarkMode
@@ -43,7 +45,10 @@ import com.example.wallapetapp.components.BotonVerMascotas
 import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoHome
 import com.example.wallapetapp.components.textoBarra
+import com.example.wallapetapp.notificaciones.Notificacion
 import com.example.wallapetapp.ui.theme.WallaColTopBar
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -69,6 +74,7 @@ fun WallaHome(navController: NavHostController, darkmode: MutableState<Boolean>)
     )
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun ContenidoWallaHome(navController: NavHostController, darkmode: MutableState<Boolean>) {
 
@@ -77,6 +83,14 @@ fun ContenidoWallaHome(navController: NavHostController, darkmode: MutableState<
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        /*Button(onClick ={
+            notiPermissionState.launchPermissionRequest()
+            val notif = Notificacion(context)
+            notif.lanzaNotificacion()
+        }) {
+            Text(text = "Notificacion")
+        }*/
         TextoHome()
         Spacer(modifier = Modifier.padding(32.dp))
         BotonVerMascotas(navController)
@@ -86,8 +100,7 @@ fun ContenidoWallaHome(navController: NavHostController, darkmode: MutableState<
         BotonVerConsejos(navController)
         Spacer(modifier = Modifier.padding(16.dp))
         BotonVerContactos(navController)
-        //Spacer(modifier = Modifier.padding(16.dp))
-       // BotonDarkMode(darkMode = darkmode)
+
     }
     Box(
         Modifier.fillMaxSize(),

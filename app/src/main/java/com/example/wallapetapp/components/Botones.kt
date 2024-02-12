@@ -1,5 +1,6 @@
 package com.example.wallapetapp.components
 
+import android.Manifest
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -26,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
 @Composable
 fun BotonVerMascotas(navController: NavHostController) {
@@ -48,10 +51,13 @@ fun BotonVerMascotas(navController: NavHostController) {
     }
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun BotonEntrarMascotas(navController: NavHostController) {
+    val notiPermissionState= rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
     Button(
-        onClick = { navController.navigate("EntrarMascotas") },
+        onClick = { notiPermissionState.launchPermissionRequest()
+            navController.navigate("EntrarMascotas") },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White
@@ -112,21 +118,12 @@ fun BotonVerContactos(navController: NavHostController) {
 
 @Composable
 fun BotonDarkMode(darkMode: MutableState<Boolean>){
-   /* Button(onClick = {darkMode.value = !darkMode.value}) {
-        Text(text = "DarkMode", fontSize = 10.sp)
-    }*/
     TextButton(onClick = {
         darkMode.value = !darkMode.value
     }, colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Transparent)
     ) {
         Text(text = "Dark\nMode")
     }
-/*    var switched by remember { mutableStateOf(false) }
-
-    Switch(checked = darkMode.value,
-        onCheckedChange = {darkMode.value = !darkMode.value}
-    )*/
-
 }
 
 

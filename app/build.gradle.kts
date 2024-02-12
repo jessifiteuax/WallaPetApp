@@ -84,7 +84,7 @@ dependencies {
     implementation("androidx.camera:camera-extensions:1.3.1")
 
     //CameraX
-    implementation ("com.google.accompanist:accompanist-permissions:0.28.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
     val camerax_version = "1.3.0-rc01"
     implementation ("androidx.camera:camera-camera2:${camerax_version}")
     implementation ("androidx.camera:camera-lifecycle:${camerax_version}")

@@ -18,7 +18,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import com.example.wallapetapp.R
 import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTextoFiltro
 import com.example.wallapetapp.components.ConsejoCard
@@ -35,7 +37,7 @@ fun WallaConsejos(navController: NavHostController, darkmode: MutableState<Boole
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { textoBarra(texto = "Consejos") },
+                title = { textoBarra(texto = stringResource(R.string.consejos)) },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = WallaColTopBar
                 ),
@@ -54,7 +56,7 @@ fun WallaConsejos(navController: NavHostController, darkmode: MutableState<Boole
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ContenidoWallaConsejos(padding: PaddingValues) {
     var filtroTexto by remember { mutableStateOf("") }
@@ -67,7 +69,8 @@ fun ContenidoWallaConsejos(padding: PaddingValues) {
             .fillMaxSize()
             .padding(padding)
     ) {
-        CampoTextoFiltro(filtroTexto, { filtroTexto = it }, "Consejo a buscar")
+        CampoTextoFiltro(filtroTexto, { filtroTexto = it },
+            stringResource(R.string.consejo_a_buscar))
                LazyColumn() {
             items(consejosFiltrados) { consejo ->
                 ConsejoCard(consejo)

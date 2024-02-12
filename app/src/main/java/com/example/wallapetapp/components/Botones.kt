@@ -54,10 +54,13 @@ fun BotonVerMascotas(navController: NavHostController) {
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun BotonEntrarMascotas(navController: NavHostController) {
-    val notiPermissionState= rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+    val notiPermissionState =
+        rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
     Button(
-        onClick = { notiPermissionState.launchPermissionRequest()
-            navController.navigate("EntrarMascotas") },
+        onClick = {
+            notiPermissionState.launchPermissionRequest()
+            navController.navigate("EntrarMascotas")
+        },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFC03D69),
             contentColor = Color.White
@@ -117,12 +120,17 @@ fun BotonVerContactos(navController: NavHostController) {
 }
 
 @Composable
-fun BotonDarkMode(darkMode: MutableState<Boolean>){
-    TextButton(onClick = {
-        darkMode.value = !darkMode.value
-    }, colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Transparent)
+fun BotonDarkMode(darkMode: MutableState<Boolean>) {
+    TextButton(
+        onClick = {
+            darkMode.value = !darkMode.value
+        },
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White,
+            containerColor = Color.Transparent
+        )
     ) {
-        Text(text = "Dark\nMode")
+        Text(text = "DarkMode", fontSize = 10.sp)
     }
 }
 

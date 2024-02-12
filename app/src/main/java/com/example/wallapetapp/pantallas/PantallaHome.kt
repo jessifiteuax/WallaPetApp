@@ -84,13 +84,6 @@ fun ContenidoWallaHome(navController: NavHostController, darkmode: MutableState<
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        /*Button(onClick ={
-            notiPermissionState.launchPermissionRequest()
-            val notif = Notificacion(context)
-            notif.lanzaNotificacion()
-        }) {
-            Text(text = "Notificacion")
-        }*/
         TextoHome()
         Spacer(modifier = Modifier.padding(32.dp))
         BotonVerMascotas(navController)

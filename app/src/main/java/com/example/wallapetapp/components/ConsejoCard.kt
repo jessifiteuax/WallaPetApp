@@ -20,7 +20,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.wallapetapp.R
 import com.example.wallapetapp.model.Consejo
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 
@@ -46,14 +48,16 @@ fun ConsejoCard(consejo: Consejo) {
             )
             Row {
                 Icon(imageVector = Icons.Outlined.Public, contentDescription = "Web", Modifier.weight(0.1f))
-                Text(text = "Más información",
+                Text(
+                    text = stringResource(R.string.m_s_informaci_n),
                     Modifier
-                    .weight(0.9f)
-                    .clickable {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(consejo.webReferencia)
-                    context.startActivity(intent)
-                },)
+                        .weight(0.9f)
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(consejo.webReferencia)
+                            context.startActivity(intent)
+                        },
+                )
             }
             Spacer(modifier = Modifier.padding(15.dp))
         }

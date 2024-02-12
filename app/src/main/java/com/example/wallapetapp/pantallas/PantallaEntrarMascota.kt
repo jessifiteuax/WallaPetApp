@@ -37,6 +37,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,12 +54,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import com.example.wallapetapp.R
 import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.components.CampoTexto
@@ -71,12 +68,12 @@ import com.example.wallapetapp.components.iconoBarra
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.domain.model.Mascota
 import com.example.wallapetapp.navegacion.BarraNav
+import com.example.wallapetapp.notificaciones.Notificacion
+import com.example.wallapetapp.notificaciones.crearCanalNotificacion
 import com.example.wallapetapp.ui.theme.WallaColTopBar
 import com.example.wallapetapp.vm.ImagePathViewModel
 import com.example.wallapetapp.vm.MascotasViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberPermissionState
-import kotlinx.coroutines.channels.Channel
 import java.io.File
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -137,6 +134,11 @@ fun ContenidoWallaEntraMascota(
     addMascota: (mascota: Mascota) -> Unit,
     imagePath: ImagePathViewModel
 ) {
+    val idCanal = "CanalWallapet"
+    val context = LocalContext.current
+    LaunchedEffect(Unit){
+        crearCanalNotificacion(idCanal, context)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -176,6 +178,7 @@ fun ContenidoWallaEntraMascota(
                 val mascota =
                     Mascota(0, nombre, poblacion, codPostal, mail, observaciones, fecha, foto)
                 addMascota(mascota)
+                Notificacion(idCanal,context)
                 navController.popBackStack()
             },
             colors = ButtonDefaults.buttonColors(

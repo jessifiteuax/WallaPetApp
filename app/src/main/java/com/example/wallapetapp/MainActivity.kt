@@ -11,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.example.wallapetapp.model.getCurrentLocation
 import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,8 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    navigation(darkmode)
-
+                   // navigation(darkmode)
+                    getCurrentLocation()
                 }
             }
         }

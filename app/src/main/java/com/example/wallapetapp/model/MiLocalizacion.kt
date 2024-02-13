@@ -17,7 +17,7 @@ import com.google.android.gms.location.LocationServices
 
 @Suppress("DEPRECATION")
 @Composable
-fun getCurrentLocation() {
+fun getCurrentLocationNO() {
    //fun that get the current location and save them in the variables latitude and longitude
     val context = LocalContext.current
     var latitude = 0.1

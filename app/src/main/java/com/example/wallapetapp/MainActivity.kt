@@ -1,6 +1,5 @@
 package com.example.wallapetapp
 
-import LocationPermissionScreen
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,8 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   // navigation(darkmode)
-                    LocationPermissionScreen()
+                    navigation(darkmode)
                 }
             }
         }

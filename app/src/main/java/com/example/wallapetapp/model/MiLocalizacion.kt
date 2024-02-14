@@ -1,56 +1,90 @@
-package com.example.wallapetapp.model
-
 import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
+import android.annotation.SuppressLint
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.LocationServices
 
-@Suppress("DEPRECATION")
+private const val REQUEST_LOCATION_PERMISSION_CODE = 1001
+
 @Composable
-fun getCurrentLocationNO() {
-   //fun that get the current location and save them in the variables latitude and longitude
-    val context = LocalContext.current
-    var latitude = 0.1
-    var longitude = 0.0
-    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
-        != PackageManager.PERMISSION_GRANTED
+fun Localizacion() {
+    var locationText by remember { mutableStateOf("") }
+    Column(
+        modifier = Modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: android.location.Location? ->
-                latitude = location?.latitude!!
-                longitude = location?.longitude!!
-            }
-    }
-    Column {
-        Text("Latitud: $latitude")
-        Text("Longitud: $longitude")
-    }
-    //return the latitude and longitude
-    //return Pair(latitude, longitude)
+        RequestLocationPermissionAndGetCurrentLocation { location ->
+            locationText = "Latitude: ${location.first}, Longitude: ${location.second}"
+        }
+        Text(text = locationText)
 
+    }
 }
 
-
-//@Composable
-private fun isLocationEnabled(context: Context): Boolean {
-    val locationManager: LocationManager =
-        getSystemService(context, LocationManager::class.java) as LocationManager
-    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-        LocationManager.NETWORK_PROVIDER
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun RequestLocationPermissionAndGetCurrentLocation(
+    onPermissionGranted: (Pair<Double, Double>) -> Unit
+) {
+    val context = LocalContext.current
+    val activity = LocalContext.current as ComponentActivity
+    val locationPermissionState = rememberPermissionState(
+        android.Manifest.permission.ACCESS_FINE_LOCATION
     )
+
+    LaunchedEffect(locationPermissionState) {
+        if (locationPermissionState.status.isGranted) {
+            getLocation(activity, onPermissionGranted)
+        } else {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION_CODE
+            )
+        }
+    }
+
+    val onRequestPermissionsResult = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            getLocation(activity, onPermissionGranted)
+        }
+    }
+
+    DisposableEffect(locationPermissionState) {
+        onRequestPermissionsResult.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        onDispose {}
+    }
 }
+
+@SuppressLint("MissingPermission")
+private fun getLocation(context: ComponentActivity, onPermissionGranted: (Pair<Double, Double>) -> Unit) {
+    val locationClient = LocationServices.getFusedLocationProviderClient(context)
+    locationClient.lastLocation.addOnSuccessListener { location ->
+        if (location != null) {
+            onPermissionGranted(Pair(location.latitude, location.longitude))
+        }
+    }
+}
+
+

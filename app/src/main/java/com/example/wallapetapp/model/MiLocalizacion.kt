@@ -31,7 +31,7 @@ private const val REQUEST_LOCATION_PERMISSION_CODE = 1001
 
 
 @Composable
-fun Localizacion(locationViewModel: LocationViewModel = viewModel()) {
+fun MiLocalizacion(locationViewModel: LocationViewModel = viewModel()) {
     var latitude by remember { mutableStateOf(0.0) }
     var longitude by remember { mutableStateOf(0.0) }
 
@@ -44,29 +44,8 @@ fun Localizacion(locationViewModel: LocationViewModel = viewModel()) {
             longitude = location.second
             locationViewModel.setLocation(latitude, longitude)
         }
-       /* Text(
-            text = "Latitude: ${locationViewModel.latitude.collectAsState().value}, Longitude: ${locationViewModel.longitude.collectAsState().value}",
-            modifier = Modifier.padding(8.dp),
-            textAlign = TextAlign.Center
-        )*/
     }
 }
-
-/*@Composable
-fun Localizacion(){
-    var locationText by remember { mutableStateOf("") }
-    Column(
-        modifier = Modifier.padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        RequestLocationPermissionAndGetCurrentLocation { location ->
-            //locationText = "Latitude: ${location.first}, Longitude: ${location.second}"
-            Text("Latitude: ${location.first}, Longitude: ${location.second}")
-
-        }
-        Text(text = locationText)
-    }
-}*/
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable

@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.wallapetapp"
+    namespace = "com.wallapet.wallapetapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.wallapetapp"
+        applicationId = "com.wallapet.wallapetapp"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

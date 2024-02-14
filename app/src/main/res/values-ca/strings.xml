@@ -89,4 +89,8 @@
     <string name="usa_protector_de_piel_en_las_zonas_m_s_expuestas_al_sol">- Utilitza protector solar en les zones més exposades al sol</string>
     <string name="lleva_una_toalla_para_limpiarle_las_patas_de_vez_en_cuando">- Porta una tovallola per netejar-li les potes de tant en tant</string>
     <string name="evita_que_coma_nieve">- Evita que mengi neu</string>
+    <string name="mascota">Mascota</string>
+    <string name="poblaci_n_donde_se_encuentra_la_mascota">Població on es troba la mascota</string>
+    <string name="tu_ubicaci_n">La teva ubicació</string>
+    <string name="aqu_te_encuentras_t">Aquí et trobes tu</string>
 </resources>

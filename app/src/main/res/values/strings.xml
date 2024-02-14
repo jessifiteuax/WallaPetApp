@@ -89,4 +89,8 @@
     <string name="usa_protector_de_piel_en_las_zonas_m_s_expuestas_al_sol">- Usa protector de piel en las zonas más expuestas al sol</string>
     <string name="lleva_una_toalla_para_limpiarle_las_patas_de_vez_en_cuando">- Lleva una toalla para limpiarle las patas de vez en cuando</string>
     <string name="evita_que_coma_nieve">- Evita que coma nieve</string>
+    <string name="mascota">Mascota</string>
+    <string name="poblaci_n_donde_se_encuentra_la_mascota">Población donde se encuentra la mascota</string>
+    <string name="tu_ubicaci_n">Tu ubicación</string>
+    <string name="aqu_te_encuentras_t">Aquí te encuentras tú</string>
 </resources>

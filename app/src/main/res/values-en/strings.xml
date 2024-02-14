@@ -89,4 +89,8 @@
     <string name="usa_protector_de_piel_en_las_zonas_m_s_expuestas_al_sol">- Use sunscreen on areas most exposed to the sun</string>
     <string name="lleva_una_toalla_para_limpiarle_las_patas_de_vez_en_cuando">- Carry a towel to clean their paws occasionally</string>
     <string name="evita_que_coma_nieve">- Avoid letting them eat snow</string>
+    <string name="mascota">Pet</string>
+    <string name="poblaci_n_donde_se_encuentra_la_mascota">Town/City where the pet is located</string>
+    <string name="tu_ubicaci_n">Your location</string>
+    <string name="aqu_te_encuentras_t">Here you are</string>
 </resources>

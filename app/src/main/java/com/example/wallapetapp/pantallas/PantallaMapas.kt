@@ -14,6 +14,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.R
@@ -98,14 +100,14 @@ fun ContenidoMaps(padding: PaddingValues, codPostal: String, viewModelLoc: Locat
             MarkerInfoWindowContent(
                 state = MarkerState(position = lugar),
                 icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher_round),
-                title = "Mascota",
-                snippet = "Población donde se encuentra la mascota"
+                title = stringResource(R.string.mascota),
+                snippet = stringResource(R.string.poblaci_n_donde_se_encuentra_la_mascota)
             )
             MarkerInfoWindowContent(
                 state = MarkerState(position = miLugar),
                 icon = BitmapDescriptorFactory.fromResource(R.drawable.icons8_brazos_arriba_48),
-                title = "Tu ubicación",
-                snippet = "Aquí te encuentras tú"
+                title = stringResource(R.string.tu_ubicaci_n),
+                snippet = stringResource(R.string.aqu_te_encuentras_t)
             )
         }
         if(mapLoading){

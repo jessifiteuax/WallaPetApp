@@ -58,7 +58,7 @@ fun WallaContactos(navController: NavHostController, darkmode: MutableState<Bool
 @Composable
 fun ContenidoWallaContactos(padding: PaddingValues) {
     var filtroTexto by remember { mutableStateOf("") }
-    val consejosFiltrados = getContactos().filter { contacto ->
+    val contactosFiltrados = getContactos().filter { contacto ->
         contacto.lugar.contains(filtroTexto, ignoreCase = true) || contacto.descripcion.contains(filtroTexto, ignoreCase = true)
     }
 
@@ -70,7 +70,7 @@ fun ContenidoWallaContactos(padding: PaddingValues) {
         CampoTextoFiltro(filtroTexto, { filtroTexto = it },
             stringResource(R.string.contacto_a_buscar))
         LazyColumn() {
-            items(consejosFiltrados) { contacto ->
+            items(contactosFiltrados) { contacto ->
                 ContactoCard(contacto)
             }
         }

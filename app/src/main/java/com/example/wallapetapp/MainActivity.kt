@@ -15,6 +15,7 @@ import com.example.wallapetapp.navegacion.navigation
 import com.example.wallapetapp.ui.theme.WallaPetAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navigation(darkmode)
-
+                    //Localizacion()
                 }
             }
         }

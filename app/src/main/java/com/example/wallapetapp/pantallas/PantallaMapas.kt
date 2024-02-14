@@ -1,5 +1,6 @@
 package com.example.wallapetapp.pantallas
 
+import Localizacion
 import android.location.Geocoder
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,8 +32,8 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun Maps(
     navHostController: NavHostController,
     codPostal: String,
-    darkmode: MutableState<Boolean>
-    //viewModelLoc: LocationViewModel = hiltViewModel()
+    darkmode: MutableState<Boolean>,
+    viewModelLoc: LocationViewModel = hiltViewModel()
 ) {
     Scaffold(
         topBar = {
@@ -49,16 +51,22 @@ fun Maps(
             )
         },
         content = { padding ->
-            ContenidoMaps(padding, codPostal/*, viewModelLoc*/)
+            ContenidoMaps(padding, codPostal, viewModelLoc)
         }
     )
 }
 
 @Composable
-fun ContenidoMaps(padding: PaddingValues, codPostal: String/*, viewModelLoc: LocationViewModel*/) {
+fun ContenidoMaps(padding: PaddingValues, codPostal: String, viewModelLoc: LocationViewModel) {
 
     val (latitude, longitude) = coordinadasDeCodPostal(codPostal)
     val lugar = LatLng(latitude, longitude)
+    Localizacion()
+    val miLatitud = viewModelLoc.latitude.collectAsState().value
+    val miLongitud = viewModelLoc.longitude.collectAsState().value
+    val miLugar = LatLng(miLatitud, miLongitud)
+
+    //val prueba = LatLng(40.4165, -3.70256)
 
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(lugar, 10f)
@@ -73,6 +81,16 @@ fun ContenidoMaps(padding: PaddingValues, codPostal: String/*, viewModelLoc: Loc
             title = "Mascota",
             snippet = "Población donde se encuentra la mascota"
         )
+        Marker(
+            state = MarkerState(position = miLugar),
+            title = "Tu ubicación",
+            snippet = "Aquí te encuentras tú"
+        )
+        /*Marker(
+            state = MarkerState(position = prueba),
+            title = "Tu ubicación",
+            snippet = "Aquí te encuentras tú"
+        )*/
     }
 }
 

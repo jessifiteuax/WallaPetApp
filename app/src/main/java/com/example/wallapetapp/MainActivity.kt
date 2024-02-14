@@ -1,5 +1,6 @@
 package com.example.wallapetapp
 
+import Localizacion
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navigation(darkmode)
+                    //Localizacion()
                 }
             }
         }

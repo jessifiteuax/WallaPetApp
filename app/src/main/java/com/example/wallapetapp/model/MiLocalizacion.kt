@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,8 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.wallapetapp.vm.LocationViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -25,20 +29,44 @@ import com.google.android.gms.location.LocationServices
 
 private const val REQUEST_LOCATION_PERMISSION_CODE = 1001
 
+
 @Composable
-fun Localizacion() {
+fun Localizacion(locationViewModel: LocationViewModel = viewModel()) {
+    var latitude by remember { mutableStateOf(0.0) }
+    var longitude by remember { mutableStateOf(0.0) }
+
+    Column(
+        modifier = Modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        RequestLocationPermissionAndGetCurrentLocation { location ->
+            latitude = location.first
+            longitude = location.second
+            locationViewModel.setLocation(latitude, longitude)
+        }
+       /* Text(
+            text = "Latitude: ${locationViewModel.latitude.collectAsState().value}, Longitude: ${locationViewModel.longitude.collectAsState().value}",
+            modifier = Modifier.padding(8.dp),
+            textAlign = TextAlign.Center
+        )*/
+    }
+}
+
+/*@Composable
+fun Localizacion(){
     var locationText by remember { mutableStateOf("") }
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         RequestLocationPermissionAndGetCurrentLocation { location ->
-            locationText = "Latitude: ${location.first}, Longitude: ${location.second}"
+            //locationText = "Latitude: ${location.first}, Longitude: ${location.second}"
+            Text("Latitude: ${location.first}, Longitude: ${location.second}")
+
         }
         Text(text = locationText)
-
     }
-}
+}*/
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable

@@ -93,4 +93,6 @@
     <string name="poblaci_n_donde_se_encuentra_la_mascota">Población donde se encuentra la mascota</string>
     <string name="tu_ubicaci_n">Tu ubicación</string>
     <string name="aqu_te_encuentras_t">Aquí te encuentras tú</string>
+    <string name="gracias">Gracias</string>
+    <string name="por_ayudar_a_encontrar_su_familia_a_la_mascota">"Por ayudar a la mascotaa encontrar a su familia "</string>
 </resources>

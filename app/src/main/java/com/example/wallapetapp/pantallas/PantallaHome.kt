@@ -17,8 +17,10 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.example.wallapetapp.components.BotonDarkMode
 import com.example.wallapetapp.navegacion.BarraNav
@@ -30,7 +32,6 @@ import com.example.wallapetapp.components.ImagenLogo
 import com.example.wallapetapp.components.TextoHome
 import com.example.wallapetapp.components.textoBarra
 import com.example.wallapetapp.ui.theme.WallaColTopBar
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,7 +57,13 @@ fun WallaHome(navController: NavHostController, darkmode: MutableState<Boolean>)
     )
 }
 
-@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun prueba(){
+    ConstraintLayout {
+
+    }
+}
+
 @Composable
 fun ContenidoWallaHome(navController: NavHostController, darkmode: MutableState<Boolean>) {
 

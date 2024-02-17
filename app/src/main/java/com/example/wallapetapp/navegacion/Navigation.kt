@@ -11,9 +11,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.wallapetapp.pantallas.Maps
 import com.example.wallapetapp.pantallas.PantallaUpdateMascota
+import com.example.wallapetapp.pantallas.TabsView
+import com.example.wallapetapp.pantallas.TabsView2
 import com.example.wallapetapp.pantallas.WallaAcercaDe
-import com.example.wallapetapp.pantallas.WallaConsejos
-import com.example.wallapetapp.pantallas.WallaContactos
 import com.example.wallapetapp.pantallas.WallaEntraMascota
 import com.example.wallapetapp.pantallas.WallaHome
 import com.example.wallapetapp.pantallas.WallaMascotas
@@ -81,10 +81,19 @@ fun navigation(darkmode: MutableState<Boolean>) {
             )
         }
         composable("Consejos") {
+            TabsView(navController, darkmode)
+        }
+        composable("Contactos") {
+            TabsView2(navController, darkmode)
+        }
+        composable("Tabs") {
+            TabsView(navController, darkmode)
+        }
+    }
+}
+/*  composable("Consejos") {
             WallaConsejos(navController,darkmode=darkmode)
         }
         composable("Contactos") {
             WallaContactos(navController,darkmode=darkmode)
-        }
-    }
-}
+        }*/

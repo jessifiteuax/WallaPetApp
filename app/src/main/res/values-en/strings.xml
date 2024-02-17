@@ -95,4 +95,6 @@
     <string name="aqu_te_encuentras_t">Here you are</string>
     <string name="gracias">Thanks</string>
     <string name="por_ayudar_a_encontrar_su_familia_a_la_mascota">To help the pet find its family</string>
+    <string name="ver_consejos">See tips</string>
+    <string name="ver_contactos">See contacts</string>
 </resources>

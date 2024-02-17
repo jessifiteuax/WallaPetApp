@@ -77,7 +77,6 @@ fun WallaMascotas(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContenidoWallaMascotas(
     padding: PaddingValues,
